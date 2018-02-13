@@ -60,7 +60,7 @@ se puede hacer uso del comando:
 `ng build`  
   
 Los artefactos construidos se almacenarán en la carpeta `dist/`. 
-Se puede emplear la bandera `-prod` para haceer una compilación de producción.
+Se puede emplear la bandera `-prod` para hacer una compilación de producción.
 
 ## Correr pruebas unitarias
 
