@@ -72,7 +72,7 @@ para correr pruebas unitarias vía [Karma](https://karma-runner.github.io).
 
 ## Correr pruebas end-to-end
 
-Ejecutar el ciomando:  
+Ejecutar el comando:  
   
 `ng e2e`  
   
@@ -87,5 +87,5 @@ desarrollo corriendo con `ng serve`.
 visitar leer [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 * Para obtener ayuda sobre la plantila HTML del proyecto visitar
 el sitio de documentación de [CoreUI](https://coreui.io/docs/getting-started/introduction/)
-* Para obtener ayuda sobre los componentes de Veloper Express,
+* Para obtener ayuda sobre los componentes de Developer Express,
 visitar el sitio oficial de su [documentación](https://js.devexpress.com/Documentation/).
