@@ -85,5 +85,7 @@ desarrollo corriendo con `ng serve`.
 
 * Para obtener más ayuda sobre Angular CLI, usar el comando`ng help` o
 visitar leer [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-* Para obtener ayuda sobbre la plantila HTML del proyecto visitar
+* Para obtener ayuda sobre la plantila HTML del proyecto visitar
 el sitio de documentación de [CoreUI](https://coreui.io/docs/getting-started/introduction/)
+* Para obtener ayuda sobre los componentes de Veloper Express,
+visitar el sitio oficial de su [documentación](https://js.devexpress.com/Documentation/).
