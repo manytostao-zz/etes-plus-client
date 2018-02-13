@@ -16,6 +16,11 @@ const APP_CONTAINERS = [
 ];
 
 // Import components
+import {CrudComponent} from './_components/crud/crud.component';
+import {DashboardComponent} from './_components/dashboard/dashboard.component';
+import {CrudToolbarComponent} from './_components/crud/crud-toolbar/crud-toolbar.component';
+import {CrudMasterDetailComponent} from './_components/crud/crud-master-detail/crud-master-detail.component';
+
 import {
   AppAsideComponent,
   AppBreadcrumbsComponent,
@@ -29,7 +34,7 @@ import {
   APP_SIDEBAR_NAV
 } from './_layout/components';
 
-const APP_COMPONENTS = [
+const APP_LAYOUT_COMPONENTS = [
   AppAsideComponent,
   AppBreadcrumbsComponent,
   AppFooterComponent,
@@ -40,6 +45,14 @@ const APP_COMPONENTS = [
   AppSidebarHeaderComponent,
   AppSidebarMinimizerComponent,
   APP_SIDEBAR_NAV
+];
+
+const APP_COMPONENTS = [
+  APP_LAYOUT_COMPONENTS,
+  CrudComponent,
+  DashboardComponent,
+  CrudToolbarComponent,
+  CrudMasterDetailComponent,
 ];
 
 // Import directives
@@ -64,6 +77,7 @@ import {AppRoutingModule} from './app.routing';
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import {TabsModule} from 'ngx-bootstrap/tabs';
 import {ChartsModule} from 'ng2-charts/ng2-charts';
+import {DevExtremeModule} from 'devextreme-angular';
 
 @NgModule({
   imports: [
@@ -71,7 +85,8 @@ import {ChartsModule} from 'ng2-charts/ng2-charts';
     AppRoutingModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
-    ChartsModule
+    ChartsModule,
+    DevExtremeModule
   ],
   declarations: [
     AppComponent,

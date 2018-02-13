@@ -9,12 +9,8 @@ export const navigation = [
     }
   },
   {
-    name: 'Coso',
-    url: '/coso',
-    icon: 'icon-speedometer',
-    badge: {
-      variant: 'info',
-      text: 'NEW'
-    }
+    name: 'CRUD',
+    url: '/crud',
+    icon: 'icon-user',
   },
 ];

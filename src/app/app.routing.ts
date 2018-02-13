@@ -6,6 +6,8 @@ import {
   FullLayoutComponent,
   SimpleLayoutComponent
 } from './_layout/containers';
+import {CrudComponent} from './_components/crud/crud.component';
+import {DashboardComponent} from './_components/dashboard/dashboard.component';
 
 export const routes: Routes = [
   {
@@ -14,17 +16,18 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: '',
-    component: FullLayoutComponent,
+    path: 'dashboard',
+    component: DashboardComponent,
     data: {
-      title: 'Home'
-    },
-    children: [
-      {
-        path: 'dashboard',
-        loadChildren: './dashboard/dashboard.module#DashboardModule'
-      }
-    ]
+      title: 'Dashboard'
+    }
+  },
+  {
+    path: 'crud',
+    component: CrudComponent,
+    data: {
+      title: 'CRUD'
+    }
   }
 ];
 
