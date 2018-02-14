@@ -16,10 +16,10 @@ const APP_CONTAINERS = [
 ];
 
 // Import components
-import {CrudComponent} from './_components/crud/crud.component';
 import {DashboardComponent} from './_components/dashboard/dashboard.component';
-import {CrudToolbarComponent} from './_components/crud/crud-toolbar/crud-toolbar.component';
+import {CrudComponent} from './_components/crud/crud.component';
 import {CrudMasterDetailComponent} from './_components/crud/crud-master-detail/crud-master-detail.component';
+import {ToolbarComponent} from './_components/toolbar/toolbar.component';
 
 import {
   AppAsideComponent,
@@ -49,10 +49,10 @@ const APP_LAYOUT_COMPONENTS = [
 
 const APP_COMPONENTS = [
   APP_LAYOUT_COMPONENTS,
-  CrudComponent,
   DashboardComponent,
-  CrudToolbarComponent,
+  CrudComponent,
   CrudMasterDetailComponent,
+  ToolbarComponent
 ];
 
 // Import directives
