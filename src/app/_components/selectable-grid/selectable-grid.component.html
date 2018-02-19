@@ -1,0 +1,41 @@
+<dx-data-grid
+  id="gridContainer"
+  keyExpr="ID"
+  [dataSource]="entitiesList"
+  [showBorders]="true"
+  [columnAutoWidth]="true"
+  [wordWrapEnabled]="true"
+  [allowColumnReordering]="true"
+  [allowColumnResizing]="true"
+  (onSelectionChanged)="onSelectionChanged($event)"
+  (onContentReady)="contentReady($event)">
+
+  <dxo-search-panel
+    [visible]="true"
+    width="250">
+  </dxo-search-panel>
+
+  <dxo-scrolling
+    mode="infinite"
+    showScrollbar="always">
+  </dxo-scrolling>
+
+  <dxo-selection
+    mode="multiple"
+    selectAllMode="page"
+    showCheckBoxesMode="none">
+  </dxo-selection>
+
+  <dxo-column-chooser
+    [enabled]="true"
+    [allowSearch]="true">
+  </dxo-column-chooser>
+
+  <dxi-column
+    *ngFor="let entityProperty of entityPropertiesList"
+    [dataField]="entityProperty.name"
+    [dataType]="entityProperty.type"
+    [width]="getColumnWidth(entityProperty.type)">
+  </dxi-column>
+
+</dx-data-grid>

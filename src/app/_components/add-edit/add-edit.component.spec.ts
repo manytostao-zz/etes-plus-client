@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CrudMasterDetailComponent } from './crud-master-detail.component';
+import { AddEditComponent } from './add-edit.component';
 
-describe('CrudMasterDetailComponent', () => {
-  let component: CrudMasterDetailComponent;
-  let fixture: ComponentFixture<CrudMasterDetailComponent>;
+describe('AddEditComponent', () => {
+  let component: AddEditComponent;
+  let fixture: ComponentFixture<AddEditComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CrudMasterDetailComponent ]
+      declarations: [ AddEditComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CrudMasterDetailComponent);
+    fixture = TestBed.createComponent(AddEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

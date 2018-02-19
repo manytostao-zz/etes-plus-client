@@ -1,6 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {LocationStrategy, HashLocationStrategy} from '@angular/common';
+import {FormsModule} from '@angular/forms';
 
 import {AppComponent} from './app.component';
 
@@ -18,8 +19,9 @@ const APP_CONTAINERS = [
 // Import components
 import {DashboardComponent} from './_components/dashboard/dashboard.component';
 import {CrudComponent} from './_components/crud/crud.component';
-import {CrudMasterDetailComponent} from './_components/crud/crud-master-detail/crud-master-detail.component';
 import {ToolbarComponent} from './_components/toolbar/toolbar.component';
+import {SelectableGridComponent} from './_components/selectable-grid/selectable-grid.component';
+import {AddEditComponent} from './_components/add-edit/add-edit.component';
 
 import {
   AppAsideComponent,
@@ -51,8 +53,9 @@ const APP_COMPONENTS = [
   APP_LAYOUT_COMPONENTS,
   DashboardComponent,
   CrudComponent,
-  CrudMasterDetailComponent,
-  ToolbarComponent
+  ToolbarComponent,
+  SelectableGridComponent,
+  AddEditComponent
 ];
 
 // Import directives
@@ -78,13 +81,16 @@ import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import {TabsModule} from 'ngx-bootstrap/tabs';
 import {ChartsModule} from 'ng2-charts/ng2-charts';
 import {DevExtremeModule} from 'devextreme-angular';
+import {ButtonsModule} from 'ngx-bootstrap';
 
 @NgModule({
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
+    ButtonsModule.forRoot(),
     ChartsModule,
     DevExtremeModule
   ],
@@ -92,7 +98,7 @@ import {DevExtremeModule} from 'devextreme-angular';
     AppComponent,
     ...APP_CONTAINERS,
     ...APP_COMPONENTS,
-    ...APP_DIRECTIVES,
+    ...APP_DIRECTIVES
   ],
   providers: [{
     provide: LocationStrategy,

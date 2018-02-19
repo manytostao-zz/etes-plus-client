@@ -1,10 +1,27 @@
 <div class="card">
   <div class="card-header">
-    Componente CRUD
+    CRUD Component
   </div>
   <div class="card-body">
-    <app-toolbar [class]="toolbarClass" [items]="toolbarItems"></app-toolbar>
+
+    <app-toolbar
+      [class]="toolbarClass"
+      [items]="toolbarItems">
+    </app-toolbar>
+
     <hr>
-    <app-crud-master-detail></app-crud-master-detail>
+
+    <app-selectable-grid
+      [entitiesList]="entitiesList"
+      (entitiesSelectedEvent)="onEntitiesSelected($event)">
+    </app-selectable-grid>
+
+    <hr>
+
+    <app-add-edit
+      *ngIf="selectedEntities != undefined && selectedEntities != [] && selectedEntities.length == 1"
+      [entity]="selectedEntities[0]">
+    </app-add-edit>
+
   </div>
 </div>
