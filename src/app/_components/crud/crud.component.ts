@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import notify from 'devextreme/ui/notify';
 
 @Component({
@@ -7,9 +7,10 @@ import notify from 'devextreme/ui/notify';
   styleUrls: ['./crud.component.scss']
 })
 export class CrudComponent implements OnInit {
-  toolbarClass = 'navbar navbar-expand-lg navbar-light bg-light';
-  toolbarItems: any[] = [];
-  entitiesList: any[] = [];
+  @Input() keyField = 'ID';
+  @Input() toolbarClass = 'navbar navbar-expand-lg navbar-light bg-light';
+  @Input() toolbarItems: any[] = [];
+  @Input() entitiesList: any[] = [];
   selectedEntities: any[];
 
   constructor() {

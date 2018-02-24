@@ -12,6 +12,7 @@
     <hr>
 
     <app-selectable-grid
+      [keyField]="keyField"
       [entitiesList]="entitiesList"
       (entitiesSelectedEvent)="onEntitiesSelected($event)">
     </app-selectable-grid>

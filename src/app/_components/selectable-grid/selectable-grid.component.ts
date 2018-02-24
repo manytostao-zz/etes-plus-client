@@ -10,6 +10,7 @@ export class SelectableGridComponent implements OnInit {
   @Output() entitiesSelectedEvent = new EventEmitter<any[]>();
   entityPropertiesList: any[] = [];
   selectedEntities: any[] = [];
+  @Input() keyField: string;
 
   constructor() {
   }
