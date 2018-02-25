@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import notify from 'devextreme/ui/notify';
 import {Employee} from './model/employee.model';
+import getPrototypeOf = Reflect.getPrototypeOf;
 
 @Component({
   selector: 'app-crud',
@@ -8,7 +9,7 @@ import {Employee} from './model/employee.model';
   styleUrls: ['./crud.component.scss']
 })
 export class CrudComponent implements OnInit {
-  @Input() keyField = 'id';
+  @Input() keyField = '';
   @Input() toolbarClass = 'navbar navbar-expand-lg navbar-light bg-light';
   @Input() toolbarItems: any[] = [];
   @Input() entitiesList: any[] = [];
@@ -85,9 +86,9 @@ export class CrudComponent implements OnInit {
       employee1,
       new Employee(
         2,
-        'Osmany',
-        'Torres Leyva',
-        'Mr.',
+        'Ana Liz',
+        'García Meriño',
+        'Ms.',
         'CEO',
         'adasdasdwqer',
         new Date(),
@@ -99,7 +100,7 @@ export class CrudComponent implements OnInit {
       ),
       new Employee(
         3,
-        'Osmany',
+        'Oscar',
         'Torres Leyva',
         'Mr.',
         'CEO',
@@ -112,6 +113,8 @@ export class CrudComponent implements OnInit {
         'La Habana'
       )
     );
+
+    this.keyField = getPrototypeOf(this.entitiesList[0])['keyField'];
   }
 
   onEntitiesSelected($event: any) {

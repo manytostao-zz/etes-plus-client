@@ -1,6 +1,14 @@
 /*--------------------------------------------------
               PROPERTY DECORATORS
  ---------------------------------------------------*/
+export function keyField(target: any, key: string) {
+  if (Reflect.has(target, 'keyField')) {
+    Reflect.set(target, 'keyField', key);
+  } else {
+    Reflect.defineProperty(target, 'keyField', {value: key});
+  }
+}
+
 export function listable(target: any, key: string) {
   if (Reflect.has(target, 'listable')) {
     Reflect.get(target, 'listable').push(key);

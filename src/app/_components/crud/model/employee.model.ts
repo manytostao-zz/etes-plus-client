@@ -1,6 +1,7 @@
-import {listable, category} from '../../../_decorators';
+import {keyField, listable, category} from '../../../_decorators';
 
 export class Employee {
+  @keyField
   id: number;
   @listable
   @category('general')
@@ -24,8 +25,10 @@ export class Employee {
   hireDate: Date;
   @category('others')
   notes: string;
+  @listable
   @category('others')
   address: string;
+  @listable
   @category('others')
   state: string;
   @category('others')
