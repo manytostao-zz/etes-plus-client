@@ -1,4 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
+import getPrototypeOf = Reflect.getPrototypeOf;
+import {camelize, isUpperCase} from 'tslint/lib/utils';
 
 @Component({
   selector: 'app-add-edit',
@@ -7,11 +9,17 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class AddEditComponent implements OnInit {
   @Input() entity: any;
+  tabPanelItems: any[] = [];
 
   constructor() {
   }
 
   ngOnInit() {
+    const tabPanelItems = this.tabPanelItems;
+    getPrototypeOf(this.entity)['categories'].forEach(function (category) {
+      const panelItem = {title: category.toUpperCase()};
+      tabPanelItems.push(panelItem);
+    });
   }
 
 }

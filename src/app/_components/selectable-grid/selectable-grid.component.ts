@@ -1,4 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import getPrototypeOf = Reflect.getPrototypeOf;
+import {forEach} from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-selectable-grid',
@@ -17,22 +19,18 @@ export class SelectableGridComponent implements OnInit {
 
   ngOnInit() {
     const entity = this.entitiesList[0];
-    for (const key in entity) {
-      if (entity.hasOwnProperty(key)) {
-        let typeName = typeof entity[key];
+    const listableProperties = getPrototypeOf(entity)['listable'];
+    const entityPropertiesList = this.entityPropertiesList;
+    listableProperties.forEach(function (property) {
+      if (entity.hasOwnProperty(property)) {
+        let typeName = typeof entity[property];
         if (typeName === 'object') {
-          typeName = entity[key].constructor.name;
+          typeName = entity[property].constructor.name;
         }
-        this.entityPropertiesList.push({name: key, type: typeName});
+        entityPropertiesList.push({name: property, type: typeName});
       }
-    }
-  }
-
-
-  contentReady(e) {
-    if (!e.component.getSelectedRowKeys().length) {
-      e.component.selectRowsByIndexes(0);
-    }
+    });
+    console.log(entity);
   }
 
   onSelectionChanged(e) {
@@ -40,12 +38,18 @@ export class SelectableGridComponent implements OnInit {
     this.entitiesSelectedEvent.emit(this.selectedEntities);
   }
 
+  contentReady(e) {
+    if (!e.component.getSelectedRowKeys().length) {
+      e.component.selectRowsByIndexes(0);
+    }
+  }
+
   getColumnWidth(type: string) {
     switch (type) {
       case 'string':
-        return 80;
+        return 100;
       case 'Date':
-        return 150;
+        return 200;
     }
   }
 }
