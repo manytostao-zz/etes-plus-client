@@ -15,11 +15,30 @@ export class AddEditComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.buildCategories();
+  }
+
+  private buildCategories() {
     const tabPanelItems = this.tabPanelItems;
-    getPrototypeOf(this.entity)['categories'].forEach(function (category) {
+    const categories: string[] = [];
+
+    for (const propertyKey in this.entity) {
+      if (this.entity.hasOwnProperty(propertyKey)) {
+        if (Reflect.hasMetadata('category', this.entity, propertyKey)) {
+          const category = Reflect.getMetadata('category', this.entity, propertyKey);
+          const categoryExists = categories.some((value) => {
+            return value === category;
+          });
+          if (!categoryExists) {
+            categories.push(category);
+          }
+        }
+      }
+    }
+
+    categories.forEach(function (category) {
       const panelItem = {title: category.toUpperCase()};
       tabPanelItems.push(panelItem);
     });
   }
-
 }

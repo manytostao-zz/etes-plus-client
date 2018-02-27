@@ -1,7 +1,7 @@
 {
   "name": "etes-plus-client",
   "version": "1.0.0",
-  "description": "Cliente de la aplicación \"electronic Total Enterprise Solution Plus",
+  "description": "Cliente de la aplicación \"electronic Total Enterprise Solution Plus\"",
   "author": "DATYS Soluciones Tecnológicas",
   "homepage": "http://www.datys.cu",
   "copyright": "Copyright 2018 DATYS Soluciones Tecnológicas",
@@ -37,6 +37,7 @@
     "ng2-charts": "1.6.0",
     "ngx-bootstrap": "2.0.2",
     "node-sass": "^4.7.2",
+    "reflect-metadata": "^0.1.12",
     "rxjs": "5.5.6",
     "simple-line-icons": "^2.4.1",
     "ts-helpers": "1.1.2",

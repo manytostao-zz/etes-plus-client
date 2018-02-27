@@ -113,8 +113,6 @@ export class CrudComponent implements OnInit {
         'La Habana'
       )
     );
-
-    this.keyField = getPrototypeOf(this.entitiesList[0])['keyField'];
   }
 
   onEntitiesSelected($event: any) {

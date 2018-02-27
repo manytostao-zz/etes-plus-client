@@ -8,29 +8,36 @@ import {forEach} from '@angular/router/src/utils/collection';
   styleUrls: ['./selectable-grid.component.scss']
 })
 export class SelectableGridComponent implements OnInit {
+  @Input() keyField: string;
   @Input() entitiesList: any[] = [];
   @Output() entitiesSelectedEvent = new EventEmitter<any[]>();
-  entityPropertiesList: any[] = [];
+  columns: any[] = [];
   selectedEntities: any[] = [];
-  @Input() keyField: string;
 
   constructor() {
   }
 
   ngOnInit() {
+    this.buildGridColumns();
+  }
+
+  private buildGridColumns() {
     const entity = this.entitiesList[0];
-    const listableProperties = getPrototypeOf(entity)['listable'];
-    const entityPropertiesList = this.entityPropertiesList;
-    listableProperties.forEach(function (property) {
-      if (entity.hasOwnProperty(property)) {
-        let typeName = typeof entity[property];
-        if (typeName === 'object') {
-          typeName = entity[property].constructor.name;
+
+    for (const propertyKey in entity) {
+      if (entity.hasOwnProperty(propertyKey)) {
+        if (Reflect.getMetadata('listable', entity, propertyKey)) {
+          let typeName = typeof entity[propertyKey];
+          if (typeName === 'object') {
+            typeName = entity[propertyKey].constructor.name;
+          }
+          this.columns.push({name: propertyKey, type: typeName});
         }
-        entityPropertiesList.push({name: property, type: typeName});
+        if (Reflect.getMetadata('key', entity, propertyKey)) {
+          this.keyField = propertyKey;
+        }
       }
-    });
-    console.log(entity);
+    }
   }
 
   onSelectionChanged(e) {

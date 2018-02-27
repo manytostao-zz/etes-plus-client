@@ -1,37 +1,37 @@
-import {keyField, listable, category} from '../../../_decorators';
+import 'reflect-metadata';
 
 export class Employee {
-  @keyField
+  @Reflect.metadata('key', true)
   id: number;
-  @listable
-  @category('general')
+  @Reflect.metadata('listable', true)
+  @Reflect.metadata('category', 'general')
   firstName: string;
-  @listable
-  @category('general')
+  @Reflect.metadata('listable', true)
+  @Reflect.metadata('category', 'general')
   lastName: string;
-  @listable
-  @category('general')
+  @Reflect.metadata('listable', true)
+  @Reflect.metadata('category', 'general')
   prefix: string;
-  @listable
-  @category('general')
+  @Reflect.metadata('listable', true)
+  @Reflect.metadata('category', 'general')
   position: string;
-  @category('general')
+  @Reflect.metadata('category', 'general')
   picture: string;
-  @listable
-  @category('others')
+  @Reflect.metadata('listable', true)
+  @Reflect.metadata('category', 'others')
   birthDate: Date;
-  @listable
-  @category('others')
+  @Reflect.metadata('listable', true)
+  @Reflect.metadata('category', 'others')
   hireDate: Date;
-  @category('others')
+  @Reflect.metadata('category', 'others')
   notes: string;
-  @listable
-  @category('others')
+  @Reflect.metadata('listable', true)
+  @Reflect.metadata('category', 'others')
   address: string;
-  @listable
-  @category('others')
+  @Reflect.metadata('listable', true)
+  @Reflect.metadata('category', 'others')
   state: string;
-  @category('others')
+  @Reflect.metadata('category', 'others')
   city: string;
 
 

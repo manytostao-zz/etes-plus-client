@@ -32,7 +32,7 @@
   </dxo-column-chooser>
 
   <dxi-column
-    *ngFor="let entityProperty of entityPropertiesList"
+    *ngFor="let entityProperty of columns"
     [dataField]="entityProperty.name"
     [dataType]="entityProperty.type"
     [width]="getColumnWidth(entityProperty.type)">
