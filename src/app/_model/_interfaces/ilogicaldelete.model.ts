@@ -1,3 +1,3 @@
-interface ILogicalDeleteEntity {
+interface ILogicalDelete {
   active: boolean;
 }
