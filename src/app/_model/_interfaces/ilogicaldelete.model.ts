@@ -1,0 +1,3 @@
+interface ILogicalDeleteEntity {
+  active: boolean;
+}
