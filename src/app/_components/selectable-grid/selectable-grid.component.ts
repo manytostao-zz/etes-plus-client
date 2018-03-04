@@ -1,13 +1,11 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import getPrototypeOf = Reflect.getPrototypeOf;
-import {forEach} from '@angular/router/src/utils/collection';
+import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
 
 @Component({
   selector: 'app-selectable-grid',
   templateUrl: './selectable-grid.component.html',
   styleUrls: ['./selectable-grid.component.scss']
 })
-export class SelectableGridComponent implements OnInit {
+export class SelectableGridComponent implements OnChanges {
   @Input() keyField: string;
   @Input() entitiesList: any[] = [];
   @Output() entitiesSelectedEvent = new EventEmitter<any[]>();
@@ -17,11 +15,11 @@ export class SelectableGridComponent implements OnInit {
   constructor() {
   }
 
-  ngOnInit() {
+  ngOnChanges() {
     this.buildGridColumns();
   }
 
-  private buildGridColumns() {
+  buildGridColumns() {
     const entity = this.entitiesList[0];
 
     for (const propertyKey in entity) {

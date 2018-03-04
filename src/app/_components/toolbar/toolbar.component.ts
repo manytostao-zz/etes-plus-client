@@ -1,19 +1,51 @@
-import {Component, Input, OnInit} from '@angular/core';
-import notify from 'devextreme/ui/notify';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.scss']
 })
-export class ToolbarComponent implements OnInit {
+export class ToolbarComponent {
   @Input() class: string;
   @Input() items: any[];
+  @Input() crudToolbar: boolean;
+  @Input() selectedEntities: any[] = [];
 
   constructor() {
   }
 
-  ngOnInit() {
+  setDisable(disableConditions: [{ type: string, values: any[] }]) {
+    switch (this.crudToolbar) {
+      case true:
+        if (disableConditions === undefined) {
+          return false;
+        }
+        if (disableConditions.length === 0) {
+          return false;
+        }
+        let result = false;
+        for (const condition of disableConditions) {
+          if (condition.type === 'rowSelection') {
+            for (const conditionValue of condition.values) {
+              if (conditionValue === 'multiple') {
+                result = !(this.selectedEntities !== undefined && this.selectedEntities !== [] && this.selectedEntities.length === 1);
+              }
+            }
+          } else {
+            if (this.selectedEntities === undefined) {
+              break;
+            }
+            const entity = this.selectedEntities[0];
+            for (const conditionValue of condition.values) {
+              if (entity.hasOwnProperty(condition.type) && entity[condition.type] === conditionValue) {
+                result = true;
+              }
+            }
+          }
+        }
+        return result;
+      default:
+        return false;
+    }
   }
-
 }

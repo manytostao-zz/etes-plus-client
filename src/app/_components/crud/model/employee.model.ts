@@ -3,34 +3,45 @@ import 'reflect-metadata';
 export class Employee {
   @Reflect.metadata('key', true)
   id: number;
+
   @Reflect.metadata('listable', true)
   @Reflect.metadata('category', 'general')
   firstName: string;
+
   @Reflect.metadata('listable', true)
   @Reflect.metadata('category', 'general')
   lastName: string;
+
   @Reflect.metadata('listable', true)
   @Reflect.metadata('category', 'general')
   prefix: string;
+
   @Reflect.metadata('listable', true)
   @Reflect.metadata('category', 'general')
   position: string;
+
   @Reflect.metadata('category', 'general')
   picture: string;
+
   @Reflect.metadata('listable', true)
   @Reflect.metadata('category', 'others')
   birthDate: Date;
+
   @Reflect.metadata('listable', true)
   @Reflect.metadata('category', 'others')
   hireDate: Date;
+
   @Reflect.metadata('category', 'others')
   notes: string;
+
   @Reflect.metadata('listable', true)
   @Reflect.metadata('category', 'others')
   address: string;
+
   @Reflect.metadata('listable', true)
   @Reflect.metadata('category', 'others')
   state: string;
+
   @Reflect.metadata('category', 'others')
   city: string;
 

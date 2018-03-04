@@ -19,51 +19,36 @@ export class CrudComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.toolbarItems = [{
-      location: 'before',
-      widget: 'dxButton',
-      options: {
-        icon: 'plus',
-        onClick: () => {
-          notify('New button has been clicked!');
-        }
-      }
-    },
-      {
-        location: 'before',
-        widget: 'dxButton',
-        locateInMenu: 'auto',
-        options: {
-          icon: 'edit',
-          onClick: () => {
-            notify('Edit button has been clicked!');
-          }
-        }
-      },
-      {
-        location: 'before',
-        widget: 'dxButton',
-        locateInMenu: 'auto',
-        options: {
-          icon: 'remove',
-          onClick: () => {
-            notify('Remove button has been clicked!');
-          }
-        }
-      },
+    this.toolbarItems = [
       {
         locateInMenu: 'always',
         text: 'Print',
         onClick: () => {
           notify('Print option has been clicked!');
-        }
+        },
+        disableConditions: [
+          {
+            type: 'rowSelection',
+            values: ['multiple']
+          },
+          {
+            type: 'position',
+            values: ['CDO', 'CGO']
+          }
+        ]
       },
       {
         locateInMenu: 'always',
         text: 'Settings',
         onClick: () => {
           notify('Settings option has been clicked!');
-        }
+        },
+        disableConditions: [
+          {
+            type: 'prefix',
+            values: ['Ms.']
+          }
+        ]
       }
     ];
 
@@ -89,7 +74,7 @@ export class CrudComponent implements OnInit {
         'Ana Liz',
         'García Meriño',
         'Ms.',
-        'CEO',
+        'CGO',
         'adasdasdwqer',
         new Date(),
         new Date(),
@@ -103,7 +88,7 @@ export class CrudComponent implements OnInit {
         'Oscar',
         'Torres Leyva',
         'Mr.',
-        'CEO',
+        'CDO',
         'adasdasdwqer',
         new Date(),
         new Date(),

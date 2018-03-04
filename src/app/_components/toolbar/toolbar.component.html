@@ -1,2 +1,32 @@
-<dx-toolbar [class]="class" [items]="items">
+<dx-toolbar [class]="class">
+
+  <ng-template [ngIf]="crudToolbar">
+    <dxi-item widget="dxButton"
+              [options]="{icon: 'plus'}"
+              location="before"
+              tooltip="s">
+    </dxi-item>
+    <dxi-item widget="dxButton"
+              [options]="{icon: 'edit'}"
+              location="before"
+              locateInMenu="auto"
+              [disabled]="setDisable([{type: 'rowSelection', values:['multiple']}])">
+    </dxi-item>
+    <dxi-item widget="dxButton"
+              [options]="{icon: 'remove'}"
+              location="before"
+              locateInMenu="auto">
+    </dxi-item>
+  </ng-template>
+
+  <dxi-item *ngFor="let item of items"
+            [widget]="item.widget"
+            [options]="item.options"
+            [location]="item.location"
+            [locateInMenu]="item.locateInMenu"
+            [text]="item.text"
+            [onClick]="item.onClick"
+            [disabled]="setDisable(item.disableConditions)">
+  </dxi-item>
+
 </dx-toolbar>
