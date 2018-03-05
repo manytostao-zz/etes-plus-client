@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import getPrototypeOf = Reflect.getPrototypeOf;
-import {camelize, isUpperCase} from 'tslint/lib/utils';
+
+import {BaseEntity} from '../../_model';
 
 @Component({
   selector: 'app-add-edit',
@@ -8,7 +8,7 @@ import {camelize, isUpperCase} from 'tslint/lib/utils';
   styleUrls: ['./add-edit.component.scss']
 })
 export class AddEditComponent implements OnInit {
-  @Input() entity: any;
+  @Input() entity: BaseEntity;
   tabPanelItems: any[] = [];
 
   constructor() {

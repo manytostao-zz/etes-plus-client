@@ -1,4 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
+import * as Collections from 'typescript-collections';
+
+import {BaseEntity} from '../../_model';
 
 @Component({
   selector: 'app-selectable-grid',
@@ -7,8 +10,9 @@ import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
 })
 export class SelectableGridComponent implements OnChanges {
   @Input() keyField: string;
-  @Input() entitiesList: any[] = [];
+  @Input() entitiesList = new Collections.LinkedList<BaseEntity>();
   @Output() entitiesSelectedEvent = new EventEmitter<any[]>();
+  listableArray: any[] = [];
   columns: any[] = [];
   selectedEntities: any[] = [];
 
@@ -17,10 +21,11 @@ export class SelectableGridComponent implements OnChanges {
 
   ngOnChanges() {
     this.buildGridColumns();
+    this.listableArray = this.entitiesList.toArray();
   }
 
   buildGridColumns() {
-    const entity = this.entitiesList[0];
+    const entity = this.entitiesList.first();
 
     for (const propertyKey in entity) {
       if (entity.hasOwnProperty(propertyKey)) {

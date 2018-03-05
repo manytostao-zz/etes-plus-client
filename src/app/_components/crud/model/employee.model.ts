@@ -1,8 +1,9 @@
 import 'reflect-metadata';
+import {BaseEntity} from '../../../_model';
+import {Certificate} from './certificate.model';
+import * as Collections from 'typescript-collections';
 
-export class Employee {
-  @Reflect.metadata('key', true)
-  id: number;
+export class Employee extends BaseEntity {
 
   @Reflect.metadata('listable', true)
   @Reflect.metadata('category', 'general')
@@ -45,8 +46,11 @@ export class Employee {
   @Reflect.metadata('category', 'others')
   city: string;
 
+  @Reflect.metadata('category', 'others')
+  certificates: Collections.LinkedList<Certificate>;
 
-  constructor(id: number,
+
+  constructor(id: string,
               firstName: string,
               lastName: string,
               prefix: string,
@@ -57,8 +61,9 @@ export class Employee {
               notes: string,
               address: string,
               state: string,
-              city: string) {
-    this.id = id;
+              city: string,
+              certificates: Collections.LinkedList<Certificate>) {
+    super(id);
     this.firstName = firstName;
     this.lastName = lastName;
     this.prefix = prefix;
@@ -69,6 +74,7 @@ export class Employee {
     this.notes = notes;
     this.address = address;
     this.state = state;
-    this.city = city
+    this.city = city;
+    this.certificates = certificates;
   }
 }

@@ -1,7 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
+import * as Collections from 'typescript-collections';
 import notify from 'devextreme/ui/notify';
+
 import {Employee} from './model/employee.model';
-import getPrototypeOf = Reflect.getPrototypeOf;
+import {BaseEntity} from '../../_model';
 
 @Component({
   selector: 'app-crud',
@@ -12,8 +14,8 @@ export class CrudComponent implements OnInit {
   @Input() keyField = '';
   @Input() toolbarClass = 'navbar navbar-expand-lg navbar-light bg-light';
   @Input() toolbarItems: any[] = [];
-  @Input() entitiesList: any[] = [];
-  selectedEntities: any[];
+  @Input() entitiesList = new Collections.LinkedList<BaseEntity>();
+  selectedEntities: BaseEntity[];
 
   constructor() {
   }
@@ -52,25 +54,27 @@ export class CrudComponent implements OnInit {
       }
     ];
 
-    const employee1 = new Employee(
-      1,
-      'Osmany',
-      'Torres Leyva',
-      'Mr.',
-      'CEO',
-      'adasdasdwqer',
-      new Date(),
-      new Date(),
-      'Notas',
-      '31A #2609',
-      'Playa',
-      'La Habana'
+    this.entitiesList.add(
+      new Employee(
+        '1',
+        'Osmany',
+        'Torres Leyva',
+        'Mr.',
+        'CEO',
+        'adasdasdwqer',
+        new Date(),
+        new Date(),
+        'Notas',
+        '31A #2609',
+        'Playa',
+        'La Habana',
+        null
+      )
     );
 
-    this.entitiesList.push(
-      employee1,
+    this.entitiesList.add(
       new Employee(
-        2,
+        '2',
         'Ana Liz',
         'García Meriño',
         'Ms.',
@@ -81,10 +85,14 @@ export class CrudComponent implements OnInit {
         'Notas',
         '31A #2609',
         'Playa',
-        'La Habana'
-      ),
+        'La Habana',
+        null
+      )
+    );
+
+    this.entitiesList.add(
       new Employee(
-        3,
+        '3',
         'Oscar',
         'Torres Leyva',
         'Mr.',
@@ -95,7 +103,8 @@ export class CrudComponent implements OnInit {
         'Notas',
         '31A #2609',
         'Playa',
-        'La Habana'
+        'La Habana',
+        null
       )
     );
   }
