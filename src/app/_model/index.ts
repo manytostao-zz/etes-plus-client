@@ -1,2 +1,2 @@
 export * from './interfaces';
-export * from './baseentity.model';
+export * from './base-entity.model';

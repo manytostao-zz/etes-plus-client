@@ -1,4 +1,4 @@
-export interface IHierarchialEntity {
+export interface IHierarchicalEntity {
   parentId: string;
   parentCode: string;
   parentDescription: string;
