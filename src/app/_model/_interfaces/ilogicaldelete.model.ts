@@ -1,0 +1,3 @@
+interface ILogicalDelete {
+  active: boolean;
+}
