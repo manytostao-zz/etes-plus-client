@@ -7,8 +7,8 @@
   [wordWrapEnabled]="true"
   [allowColumnReordering]="true"
   [allowColumnResizing]="true"
-  (onSelectionChanged)="onSelectionChanged($event)"
-  (onContentReady)="contentReady($event)">
+  (onSelectionChanged)="handleSelectionChangedEvent($event)"
+  (onContentReady)="handleContentReadyEvent($event)">
 
   <dxo-search-panel
     [visible]="true"
@@ -35,7 +35,8 @@
     *ngFor="let column of columns"
     [dataField]="column.name"
     [dataType]="column.type"
-    [width]="getColumnWidth(column.type)">
+    [width]="getColumnWidth(column.type)"
+    [visible]="column.visible">
   </dxi-column>
 
 </dx-data-grid>

@@ -1,17 +1,21 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.scss']
 })
-export class ToolbarComponent {
+export class ToolbarComponent implements OnInit {
   @Input() class: string;
   @Input() items: any[];
   @Input() crudToolbar: boolean;
   @Input() selectedEntities: any[] = [];
+  @Output() onToolbarItemClickedEvent = new EventEmitter<string>();
 
   constructor() {
+  }
+
+  ngOnInit() {
   }
 
   setDisable(disableConditions: [{ type: string, values: any[] }]) {
@@ -47,5 +51,9 @@ export class ToolbarComponent {
       default:
         return false;
     }
+  }
+
+  handleItemClickedEvent($event: any) {
+    this.onToolbarItemClickedEvent.emit($event.itemData.type);
   }
 }

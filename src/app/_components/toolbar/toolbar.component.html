@@ -1,22 +1,30 @@
-<dx-toolbar [class]="class">
+<dx-toolbar
+  [class]="class"
+  (onItemClick)="handleItemClickedEvent($event)">
 
   <ng-template [ngIf]="crudToolbar">
+
     <dxi-item widget="dxButton"
               [options]="{icon: 'plus'}"
-              location="before"
-              tooltip="s">
+              type="add"
+              location="before">
     </dxi-item>
+
     <dxi-item widget="dxButton"
               [options]="{icon: 'edit'}"
               location="before"
               locateInMenu="auto"
+              type="edit"
               [disabled]="setDisable([{type: 'rowSelection', values:['multiple']}])">
     </dxi-item>
+
     <dxi-item widget="dxButton"
               [options]="{icon: 'remove'}"
+              type="remove"
               location="before"
               locateInMenu="auto">
     </dxi-item>
+
   </ng-template>
 
   <dxi-item *ngFor="let item of items"

@@ -1,30 +1,43 @@
-<div class="card">
-  <div class="card-header">
-    CRUD Component
-  </div>
-  <div class="card-body">
+<app-toolbar
+  [class]="toolbarClass"
+  [items]="toolbarItems"
+  [crudToolbar]="true"
+  [selectedEntities]="selectedEntities"
+  (onToolbarItemClickedEvent)="handleToolbarItemClicked($event)">
+</app-toolbar>
 
-    <app-toolbar
-      [class]="toolbarClass"
-      [items]="toolbarItems"
-      [crudToolbar]="true"
-      [selectedEntities]="selectedEntities">
-    </app-toolbar>
+<br>
 
-    <hr>
+<app-selectable-grid
+  [keyField]="keyField"
+  [entitiesList]="entitiesList"
+  (onEntitiesSelectedEvent)="handleEntitiesSelectedEvent($event)">
+</app-selectable-grid>
 
-    <app-selectable-grid
-      [keyField]="keyField"
-      [entitiesList]="entitiesList"
-      (entitiesSelectedEvent)="onEntitiesSelected($event)">
-    </app-selectable-grid>
+<br>
 
-    <hr>
+<app-add-edit
+  *ngIf="addEditEntity !== undefined"
+  [entity]="addEditEntity"
+  [editable]="false">
+</app-add-edit>
+
+<dx-popup
+  [(visible)]="popupVisible"
+  [title]="'Edit ' + entityType"
+  [toolbarItems]="[
+    {toolbar: 'bottom', widget: 'dxButton', location: 'after', options: {text:'Cancel', type: 'danger'}},
+    {toolbar: 'bottom', widget: 'dxButton', location: 'after', options: {text: 'Accept', type: 'success'}}
+    ]">
+
+  <div *dxTemplate="let data of 'content'">
 
     <app-add-edit
       *ngIf="selectedEntities != undefined && selectedEntities != [] && selectedEntities.length == 1"
-      [entity]="selectedEntities[0]">
+      [entity]="addEditEntity"
+      [editable]="true">
     </app-add-edit>
 
   </div>
-</div>
+
+</dx-popup>

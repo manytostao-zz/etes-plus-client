@@ -5,8 +5,8 @@ export const navigation = [
     icon: 'icon-speedometer',
   },
   {
-    name: 'CRUD',
-    url: '/crud',
+    name: 'CRUD Test',
+    url: '/crud-test',
     icon: 'icon-user',
     badge: {
       variant: 'info',
