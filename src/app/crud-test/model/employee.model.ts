@@ -1,9 +1,7 @@
 import 'reflect-metadata';
-import {BaseEntity} from '../../../_model';
-import {Certificate} from './certificate.model';
-import * as Collections from 'typescript-collections';
+import {BaseEntity} from '../../_model';
 
-export class Employee extends BaseEntity {
+export class Employee extends BaseEntity{
 
   @Reflect.metadata('listable', true)
   @Reflect.metadata('category', 'general')
@@ -18,6 +16,7 @@ export class Employee extends BaseEntity {
   prefix: string;
 
   @Reflect.metadata('listable', true)
+  @Reflect.metadata('visible', false)
   @Reflect.metadata('category', 'general')
   position: string;
 
@@ -26,17 +25,21 @@ export class Employee extends BaseEntity {
 
   @Reflect.metadata('listable', true)
   @Reflect.metadata('category', 'others')
+  @Reflect.metadata('group', 'dates')
   birthDate: Date;
 
   @Reflect.metadata('listable', true)
   @Reflect.metadata('category', 'others')
+  @Reflect.metadata('group', 'dates')
   hireDate: Date;
 
   @Reflect.metadata('category', 'others')
+  @Reflect.metadata('group', 'textarea')
   notes: string;
 
   @Reflect.metadata('listable', true)
   @Reflect.metadata('category', 'others')
+  @Reflect.metadata('group', 'textarea')
   address: string;
 
   @Reflect.metadata('listable', true)
@@ -45,9 +48,6 @@ export class Employee extends BaseEntity {
 
   @Reflect.metadata('category', 'others')
   city: string;
-
-  @Reflect.metadata('category', 'others')
-  certificates: Collections.LinkedList<Certificate>;
 
 
   constructor(id: string,
@@ -61,8 +61,7 @@ export class Employee extends BaseEntity {
               notes: string,
               address: string,
               state: string,
-              city: string,
-              certificates: Collections.LinkedList<Certificate>) {
+              city: string) {
     super(id);
     this.firstName = firstName;
     this.lastName = lastName;
@@ -74,7 +73,6 @@ export class Employee extends BaseEntity {
     this.notes = notes;
     this.address = address;
     this.state = state;
-    this.city = city;
-    this.certificates = certificates;
+    this.city = city
   }
 }

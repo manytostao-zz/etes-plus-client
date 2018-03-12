@@ -1,13 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-// Import Containers
-import {
-  FullLayoutComponent,
-  SimpleLayoutComponent
-} from './_layout/containers';
-import {CrudComponent} from './_components/crud/crud.component';
 import {DashboardComponent} from './_components/dashboard/dashboard.component';
+import {CrudTestComponent} from './crud-test/crud-test.component';
 
 export const routes: Routes = [
   {
@@ -23,10 +18,10 @@ export const routes: Routes = [
     }
   },
   {
-    path: 'crud',
-    component: CrudComponent,
+    path: 'crud-test',
+    component: CrudTestComponent,
     data: {
-      title: 'CRUD'
+      title: 'CRUD Test'
     }
   }
 ];
