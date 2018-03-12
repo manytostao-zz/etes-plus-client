@@ -1,8 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import * as Collections from 'typescript-collections';
-import notify from 'devextreme/ui/notify';
 
-import {Employee} from './model/employee.model';
 import {BaseEntity} from '../../_model';
 
 @Component({
@@ -12,104 +10,40 @@ import {BaseEntity} from '../../_model';
 })
 export class CrudComponent implements OnInit {
   @Input() keyField = '';
-  @Input() toolbarClass = 'navbar navbar-expand-lg navbar-light bg-light';
+  @Input() toolbarClass: string;
   @Input() toolbarItems: any[] = [];
   @Input() entitiesList = new Collections.LinkedList<BaseEntity>();
+  @Input() entityType = '';
   selectedEntities: BaseEntity[];
+  addEditEntity: any;
+  popupVisible = false;
 
   constructor() {
   }
 
   ngOnInit() {
-    this.toolbarItems = [
-      {
-        locateInMenu: 'always',
-        text: 'Print',
-        onClick: () => {
-          notify('Print option has been clicked!');
-        },
-        disableConditions: [
-          {
-            type: 'rowSelection',
-            values: ['multiple']
-          },
-          {
-            type: 'position',
-            values: ['CDO', 'CGO']
-          }
-        ]
-      },
-      {
-        locateInMenu: 'always',
-        text: 'Settings',
-        onClick: () => {
-          notify('Settings option has been clicked!');
-        },
-        disableConditions: [
-          {
-            type: 'prefix',
-            values: ['Ms.']
-          }
-        ]
-      }
-    ];
-
-    this.entitiesList.add(
-      new Employee(
-        '1',
-        'Osmany',
-        'Torres Leyva',
-        'Mr.',
-        'CEO',
-        'adasdasdwqer',
-        new Date(),
-        new Date(),
-        'Notas',
-        '31A #2609',
-        'Playa',
-        'La Habana',
-        null
-      )
-    );
-
-    this.entitiesList.add(
-      new Employee(
-        '2',
-        'Ana Liz',
-        'García Meriño',
-        'Ms.',
-        'CGO',
-        'adasdasdwqer',
-        new Date(),
-        new Date(),
-        'Notas',
-        '31A #2609',
-        'Playa',
-        'La Habana',
-        null
-      )
-    );
-
-    this.entitiesList.add(
-      new Employee(
-        '3',
-        'Oscar',
-        'Torres Leyva',
-        'Mr.',
-        'CDO',
-        'adasdasdwqer',
-        new Date(),
-        new Date(),
-        'Notas',
-        '31A #2609',
-        'Playa',
-        'La Habana',
-        null
-      )
-    );
+    if (this.entityType === '' && this.entitiesList.size() > 0) {
+      this.entityType = this.entitiesList.first().constructor.name;
+    }
   }
 
-  onEntitiesSelected($event: any) {
+  handleEntitiesSelectedEvent($event: any) {
     this.selectedEntities = $event;
+    if (this.selectedEntities.length === 1) {
+      this.addEditEntity = this.selectedEntities[0];
+    } else {
+      this.addEditEntity = undefined;
+    }
+  }
+
+  handleToolbarItemClicked($event: string) {
+    switch ($event) {
+      case 'add':
+        break;
+      case 'edit':
+        this.addEditEntity = this.selectedEntities[0];
+        this.popupVisible = true;
+        break;
+    }
   }
 }

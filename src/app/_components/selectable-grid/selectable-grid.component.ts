@@ -11,7 +11,7 @@ import {BaseEntity} from '../../_model';
 export class SelectableGridComponent implements OnChanges {
   @Input() keyField: string;
   @Input() entitiesList = new Collections.LinkedList<BaseEntity>();
-  @Output() entitiesSelectedEvent = new EventEmitter<any[]>();
+  @Output() onEntitiesSelectedEvent = new EventEmitter<any[]>();
   listableArray: any[] = [];
   columns: any[] = [];
   selectedEntities: any[] = [];
@@ -29,12 +29,14 @@ export class SelectableGridComponent implements OnChanges {
 
     for (const propertyKey in entity) {
       if (entity.hasOwnProperty(propertyKey)) {
-        if (Reflect.getMetadata('listable', entity, propertyKey)) {
+        if (Reflect.getMetadata('listable', entity, propertyKey) === true) {
           let typeName = typeof entity[propertyKey];
           if (typeName === 'object') {
             typeName = entity[propertyKey].constructor.name;
           }
-          this.columns.push({name: propertyKey, type: typeName});
+          const column = {name: propertyKey, type: typeName};
+          column['visible'] = Reflect.getMetadata('visible', entity, propertyKey);
+          this.columns.push(column);
         }
         if (Reflect.getMetadata('key', entity, propertyKey)) {
           this.keyField = propertyKey;
@@ -43,12 +45,12 @@ export class SelectableGridComponent implements OnChanges {
     }
   }
 
-  onSelectionChanged(e) {
+  handleSelectionChangedEvent(e) {
     this.selectedEntities = e.selectedRowsData;
-    this.entitiesSelectedEvent.emit(this.selectedEntities);
+    this.onEntitiesSelectedEvent.emit(this.selectedEntities);
   }
 
-  contentReady(e) {
+  handleContentReadyEvent(e) {
     if (!e.component.getSelectedRowKeys().length) {
       e.component.selectRowsByIndexes(0);
     }

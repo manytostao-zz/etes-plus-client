@@ -22,6 +22,7 @@ import {CrudComponent} from './_components/crud/crud.component';
 import {ToolbarComponent} from './_components/toolbar/toolbar.component';
 import {SelectableGridComponent} from './_components/selectable-grid/selectable-grid.component';
 import {AddEditComponent} from './_components/add-edit/add-edit.component';
+import {CrudTestComponent} from './crud-test/crud-test.component';
 
 import {
   AppAsideComponent,
@@ -55,7 +56,8 @@ const APP_COMPONENTS = [
   CrudComponent,
   ToolbarComponent,
   SelectableGridComponent,
-  AddEditComponent
+  AddEditComponent,
+  CrudTestComponent
 ];
 
 // Import directives
