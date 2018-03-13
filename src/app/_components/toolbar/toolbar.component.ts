@@ -8,8 +8,14 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 export class ToolbarComponent implements OnInit {
   @Input() class: string;
   @Input() items: any[];
-  @Input() crudToolbar: boolean;
+  @Input() inCrud: boolean;
   @Input() selectedEntities: any[] = [];
+  @Input() showDefaultButtons = false;
+  @Input() showAcceptButton = false;
+  @Input() showCancelButton = false;
+  @Input() showAddButton = false;
+  @Input() showEditButton = false;
+  @Input() showRemoveButton = false;
   @Output() onToolbarItemClickedEvent = new EventEmitter<string>();
 
   constructor() {
@@ -19,7 +25,7 @@ export class ToolbarComponent implements OnInit {
   }
 
   setDisable(disableConditions: [{ type: string, values: any[] }]) {
-    switch (this.crudToolbar) {
+    switch (this.inCrud) {
       case true:
         if (disableConditions === undefined) {
           return false;
