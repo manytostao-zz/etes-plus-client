@@ -2,16 +2,37 @@
   [class]="class"
   (onItemClick)="handleItemClickedEvent($event)">
 
-  <ng-template [ngIf]="crudToolbar">
+  <ng-template [ngIf]="showDefaultButtons">
+
+    <dxi-item widget="dxButton"
+              [options]="{icon: 'check'}"
+              [visible]="showAcceptButton"
+              type="accept"
+              location="before">
+    </dxi-item>
+
+    <dxi-item widget="dxButton"
+              [options]="{icon: 'close'}"
+              [visible]="showCancelButton"
+              type="cancel"
+              location="before">
+    </dxi-item>
+
+    <dxi-item text=" | "
+              [visible]="showAcceptButton || showCancelButton"
+              location="before">
+    </dxi-item>
 
     <dxi-item widget="dxButton"
               [options]="{icon: 'plus'}"
+              [visible]="showAddButton"
               type="add"
               location="before">
     </dxi-item>
 
     <dxi-item widget="dxButton"
               [options]="{icon: 'edit'}"
+              [visible]="showEditButton"
               location="before"
               locateInMenu="auto"
               type="edit"
@@ -19,7 +40,8 @@
     </dxi-item>
 
     <dxi-item widget="dxButton"
-              [options]="{icon: 'remove'}"
+              [options]="{icon: 'trash'}"
+              [visible]="showRemoveButton"
               type="remove"
               location="before"
               locateInMenu="auto">

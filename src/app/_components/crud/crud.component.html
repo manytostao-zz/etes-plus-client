@@ -1,7 +1,13 @@
 <app-toolbar
   [class]="toolbarClass"
   [items]="toolbarItems"
-  [crudToolbar]="true"
+  [inCrud]="true"
+  [showDefaultButtons]="showToolbarDefaultButtons"
+  [showAcceptButton]="showToolbarAcceptButton"
+  [showCancelButton]="showToolbarCancelButton"
+  [showAddButton]="showToolbarAddButton"
+  [showEditButton]="showToolbarEditButton"
+  [showRemoveButton]="showToolbarRemoveButton"
   [selectedEntities]="selectedEntities"
   (onToolbarItemClickedEvent)="handleToolbarItemClicked($event)">
 </app-toolbar>
