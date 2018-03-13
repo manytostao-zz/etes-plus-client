@@ -13,4 +13,13 @@ export const navigation = [
       text: 'NEW'
     }
   },
+  {
+    name: 'EntitySearch Test',
+    url: '/entity-search-test',
+    icon: 'icon-user',
+    badge: {
+      variant: 'info',
+      text: ''
+    }
+  }
 ];

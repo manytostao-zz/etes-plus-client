@@ -1,0 +1,43 @@
+    <div class="dx-field">
+      <dx-text-box width="220px" style="float: left;float-displace: 0"></dx-text-box>
+      <dx-button style="float: left" icon="add" (onClick)="newEntitySearch(entityName)"> </dx-button>
+      <dx-button style="float: left" icon="search"(onClick)="openEntitySearch(entityName)"> </dx-button>
+      <dx-button style="float: left" icon="erase">  </dx-button>
+    </div>
+
+    <dx-popup
+      [(visible)]="popupVisible"
+      [title]="'Edit ' + entityType"
+      >
+
+      <div *dxTemplate="let data of 'content'">
+
+        <app-crud
+          [entityType]="entityType"
+          [entitiesList]="entitiesList"
+          [toolbarItems]="toolbarItems"
+          [showToolbarAcceptButton]="true"
+          [showToolbarCancelButton]="true"
+          toolbarClass="navbar navbar-expand-lg navbar-light bg-light">
+        </app-crud>
+
+      </div>
+
+    </dx-popup>
+
+    <dx-popup
+      [(visible)]="popupVisibleAdd"
+      [title]="'New ' + entityType"
+    >
+
+      <div *dxTemplate="let data of 'content'">
+
+        <app-add-edit
+          *ngIf="selectedEntities != undefined && selectedEntities != [] && selectedEntities.length == 1"
+          [entity]="addEditEntity"
+          [editable]="true">
+        </app-add-edit>
+
+      </div>
+
+    </dx-popup>
