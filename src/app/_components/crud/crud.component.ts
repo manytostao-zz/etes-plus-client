@@ -14,6 +14,12 @@ export class CrudComponent implements OnInit {
   @Input() toolbarItems: any[] = [];
   @Input() entitiesList = new Collections.LinkedList<BaseEntity>();
   @Input() entityType = '';
+  @Input() showToolbarDefaultButtons = true;
+  @Input() showToolbarAcceptButton = false;
+  @Input() showToolbarCancelButton = false;
+  @Input() showToolbarAddButton = true;
+  @Input() showToolbarEditButton = true;
+  @Input() showToolbarRemoveButton = true;
   selectedEntities: BaseEntity[];
   addEditEntity: any;
   popupVisible = false;
