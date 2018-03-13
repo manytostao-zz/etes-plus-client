@@ -1,0 +1,18 @@
+assembly-versioning-scheme: MajorMinorPatch
+major-version-bump-message: '\+semver:\s?major'
+minor-version-bump-message: '\+semver:\s?minor'
+patch-version-bump-message: '\+semver:\s?patch'
+commit-message-incrementing: MergeMessageOnly
+mode: ContinuousDeployment
+branches:
+  master:
+    tag: rc
+    increment: Minor
+  develop:
+    track-merge-target: true
+  (pull|pull\-requests|pr)[/-]:
+    tag: PullRequest
+    tag-number-pattern: '[/-](?<number>\d+)[-/]'
+  releases?[/-]:
+    tag: hf
+    increment: Patch
