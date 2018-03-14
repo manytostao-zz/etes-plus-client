@@ -1,5 +1,5 @@
     <div class="dx-field">
-      <dx-text-box width="220px" style="float: left;float-displace: 0"></dx-text-box>
+      <dx-text-box width="220px" style="float: left;float-displace: 0" #nameEntitySearch ></dx-text-box>
       <dx-button style="float: left" icon="add" (onClick)="newEntitySearch(entityName)"> </dx-button>
       <dx-button style="float: left" icon="search"(onClick)="openEntitySearch(entityName)"> </dx-button>
       <dx-button style="float: left" icon="erase">  </dx-button>
@@ -15,6 +15,8 @@
         <app-crud
           [entityType]="entityType"
           [entitiesList]="entitiesList"
+          [multipleSelection]="false"
+          (onToolbarItemClicked) = "acceptEventClick($event)"
           [toolbarItems]="toolbarItems"
           [showToolbarAcceptButton]="true"
           [showToolbarCancelButton]="true"

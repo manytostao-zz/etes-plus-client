@@ -1,8 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, ViewChild, OnInit, ElementRef} from '@angular/core';
 import {Employee} from '../../crud-test/model/employee.model';
 import notify from 'devextreme/ui/notify';
 import * as Collections from 'typescript-collections';
 import {BaseEntity} from '../../_model';
+
 
 @Component({
   selector: 'app-entity-search',
@@ -11,8 +12,10 @@ import {BaseEntity} from '../../_model';
 })
 export class EntitySearchComponent implements OnInit {
   @Input() entityName: string;
+  @Input() propertyName: any[] = ['firstName', 'lastName'];
+  @ViewChild('nameEntitySearch') nameEntitySearch;
   toolbarItems: any[] = [];
-  selectedEntities: BaseEntity[];
+  selectedEntity: BaseEntity;
   addEditEntity: any;
   entitiesList = new Collections.LinkedList<BaseEntity>();
   entityType = '';
@@ -79,12 +82,24 @@ export class EntitySearchComponent implements OnInit {
     this.popupVisible = true;
   }
 
-  saveEntity() {
-
+  acceptEventClick($event) {
+    switch ($event.type) {
+      case 'accept':
+        if (this.propertyName.length === 1) {
+          this.selectedEntity = $event.selectedEntities[0][this.propertyName[0]];
+        } else if (this.propertyName.length > 1) {
+          this.selectedEntity = $event.selectedEntities[0][this.propertyName[0]] + ' - ' + $event.selectedEntities[0][this.propertyName[1]];
+        }
+        this.popupVisible = false;
+        this.nameEntitySearch.value = this.selectedEntity;
+        break;
+      default:
+        break;
+    }
   }
 
   newEntitySearch() {
-
+    this.addEditEntity = new Employee('', 'das', '', '', '', '', new Date, new Date , '', '', '', '');
     this.popupVisibleAdd = true;
   }
 }
