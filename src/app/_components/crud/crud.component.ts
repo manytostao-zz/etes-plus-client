@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, Output, OnInit, EventEmitter} from '@angular/core';
 import * as Collections from 'typescript-collections';
 
 import {BaseEntity} from '../../_model';
@@ -20,6 +20,8 @@ export class CrudComponent implements OnInit {
   @Input() showToolbarAddButton = true;
   @Input() showToolbarEditButton = true;
   @Input() showToolbarRemoveButton = true;
+  @Input() multipleSelection = true;
+  @Output() onToolbarItemClicked = new EventEmitter<{ type: string, selectedEntities: BaseEntity[] }>();
   selectedEntities: BaseEntity[];
   addEditEntity: any;
   popupVisible = false;
@@ -44,11 +46,13 @@ export class CrudComponent implements OnInit {
 
   handleToolbarItemClicked($event: string) {
     switch ($event) {
-      case 'add':
-        break;
       case 'edit':
         this.addEditEntity = this.selectedEntities[0];
         this.popupVisible = true;
+        this.onToolbarItemClicked.emit({type: $event, selectedEntities: this.selectedEntities});
+        break;
+      default:
+        this.onToolbarItemClicked.emit({type: $event, selectedEntities: this.selectedEntities});
         break;
     }
   }
