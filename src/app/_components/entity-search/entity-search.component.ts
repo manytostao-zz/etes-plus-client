@@ -15,7 +15,8 @@ export class EntitySearchComponent implements OnInit {
   @Input() propertyName: any[] = ['firstName', 'lastName'];
   @ViewChild('nameEntitySearch') nameEntitySearch;
   toolbarItems: any[] = [];
-  selectedEntity: BaseEntity;
+  /*selectedEntity: BaseEntity;*/
+  selectedEntity: string;
   addEditEntity: any;
   entitiesList = new Collections.LinkedList<BaseEntity>();
   entityType = '';
