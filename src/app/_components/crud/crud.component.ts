@@ -7,13 +7,14 @@ import {BaseEntity} from '../../_model';
  * Componente que genera elementos visuales para listar, crear, actualizar y eliminar entidades
  *
  * @example
+ *
  * <app-crud
  *             [entityType]="entityType"
  *             [entitiesList]="entitiesList"
  *             [multipleSelection]="false"
  *             [toolbarItems]="toolbarItems"
  *             [showToolbarDefaultButtons]="true"
- *             toolbarClass="navbar navbar-expand-lg navbar-light bg-light">
+ *             toolbarCssClass="navbar navbar-expand-lg navbar-light bg-light">
  * </app-crud>
  */
 @Component({
@@ -33,13 +34,13 @@ export class CrudComponent implements OnInit {
    */
   @Input() entityType: string;
   /**
-   * Define si serán mostrados los botones por defecto del componente {@link ToolbarComponent}
+   * Define si el dx-grid del componente {@link SelectableGridComponent} será de múltiple selección
    * @type {boolean}
    */
   @Input() multipleSelection = true;
   /**
-   * Evento lanzado cuando se interactúa con los elementos del {@link ToolbarComponent}
-   * @type {EventEmitter<{type: string; selectedEntities: BaseEntity[]}>}
+   * Define si serán mostrados los botones por defecto del componente {@link ToolbarComponent}
+   * @type {boolean}
    */
   @Input() showToolbarDefaultButtons = true;
   /**
@@ -71,7 +72,7 @@ export class CrudComponent implements OnInit {
    * Define las clases CSS a utilizar por el componente {@link ToolbarComponent}
    * @type {string}
    */
-  @Input() toolbarClass: string;
+  @Input() toolbarCssClass: string;
   /**
    * Define los elementos (botones, etc.) que contendrá el componente {@link ToolbarComponent}
    * @type {any[]}
@@ -83,8 +84,8 @@ export class CrudComponent implements OnInit {
    */
   @Input() entitiesList = new Collections.LinkedList<BaseEntity>();
   /**
-   * Define si el dx-grid del componente {@link SelectableGridComponent} será de múltiple selección
-   * @type {boolean}
+   * Evento lanzado cuando se interactúa con los elementos del {@link ToolbarComponent}
+   * @type {EventEmitter<{type: string; selectedEntities: BaseEntity[]}>}
    */
   @Output() onToolbarItemClicked = new EventEmitter<{ type: string, selectedEntities: BaseEntity[] }>();
   /**
