@@ -10,6 +10,7 @@ import {BaseEntity} from '../../_model';
 })
 export class SelectableGridComponent implements OnChanges {
   @Input() keyField: string;
+  @Input() multipleSelection = true;
   @Input() entitiesList = new Collections.LinkedList<BaseEntity>();
   @Output() onEntitiesSelectedEvent = new EventEmitter<any[]>();
   listableArray: any[] = [];
