@@ -102,4 +102,8 @@ export class EntitySearchComponent implements OnInit {
     this.addEditEntity = new Employee('', 'das', '', '', '', '', new Date, new Date , '', '', '', '');
     this.popupVisibleAdd = true;
   }
+
+  trashEntitySearch() {
+        this.nameEntitySearch.value = '';
+  }
 }

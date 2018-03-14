@@ -2,7 +2,7 @@
       <dx-text-box width="220px" style="float: left;float-displace: 0" #nameEntitySearch ></dx-text-box>
       <dx-button style="float: left" icon="add" (onClick)="newEntitySearch(entityName)"> </dx-button>
       <dx-button style="float: left" icon="search"(onClick)="openEntitySearch(entityName)"> </dx-button>
-      <dx-button style="float: left" icon="erase">  </dx-button>
+      <dx-button style="float: left" icon="trash" (onClick)="trashEntitySearch()">  </dx-button>
     </div>
 
     <dx-popup
