@@ -12,5 +12,5 @@ export const navigation = [
       variant: 'info',
       text: 'NEW'
     }
-  },
+  }
 ];
