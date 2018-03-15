@@ -1,24 +1,53 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import * as Collections from 'typescript-collections';
 
 import {BaseEntity} from '../../_model';
-import * as Collections from 'typescript-collections';
+
+/**
+ * Componente que genera elementos visuales para crear y/o editar objetos de la enitidad que controla
+ *
+ * @example
+ *
+ * <app-add-edit
+ *             [entity]="addEditEntity"
+ *             [editable]="false">
+ * </app-add-edit>
+ */
 @Component({
   selector: 'app-add-edit',
   templateUrl: './add-edit.component.html',
   styleUrls: ['./add-edit.component.scss']
 })
 export class AddEditComponent implements OnInit {
-  @Input() entity: BaseEntity;
+
+  /**
+   * Define si los elementos del componente se muestran habilitados
+   * @type {boolean}
+   */
   @Input() editable = true;
+
+  /**
+   * Contiene la entidad que controla el componente
+   * @type {BaseEntity}
+   */
+  @Input() entity: BaseEntity;
+
+  /**
+   * Contiene los metadatos definidos en las propiedades de la entidad que controla
+   * @type {Dictionary<string, Dictionary<string, string[]>>}
+   */
   entityMetadata = new Collections.Dictionary<string, Collections.Dictionary<string, string[]>>();
 
-  constructor() {
-  }
-
+  /**
+   * Inicializa el componente
+   */
   ngOnInit() {
     this.extractEntityMetadata();
   }
 
+  /**
+   * Extrae los metadatos de la entidad que controla y los carga en {@link | entityMetadata}
+   */
   extractEntityMetadata() {
     for (const field in this.entity) {
       if (this.entity.hasOwnProperty(field)) {
