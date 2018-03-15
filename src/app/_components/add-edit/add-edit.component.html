@@ -1,38 +1,34 @@
-<dx-form
-  [(formData)]="entity">
+<dx-scroll-view
+  showScrollbar="onHover">
 
-  <dxi-item
-    itemType="tabbed">
+  <dx-form
+    [(formData)]="entity">
 
-    <dxi-tab
-      *ngFor="let category of entityMetadata.keys()"
-      [title]="category.toUpperCase()">
+    <dxi-item
+      itemType="tabbed">
 
-      <dxi-item
-        *ngFor="let group of entityMetadata.getValue(category).keys().sort()"
-        itemType="group"
-        [caption]="group.toUpperCase()"
-        [colCount]="2">
+      <dxi-tab
+        *ngFor="let category of entityMetadata.keys()"
+        [title]="category.toUpperCase()">
 
         <dxi-item
-          *ngFor="let field of entityMetadata.getValue(category).getValue(group)"
-          [dataField]="field"
-          [disabled]="!editable">
+          *ngFor="let group of entityMetadata.getValue(category).keys().sort()"
+          itemType="group"
+          [caption]="group.toUpperCase()"
+          [colCount]="2">
+
+          <dxi-item
+            *ngFor="let field of entityMetadata.getValue(category).getValue(group)"
+            [dataField]="field"
+            [disabled]="!editable">
+          </dxi-item>
+
         </dxi-item>
 
-      </dxi-item>
+      </dxi-tab>
 
-    </dxi-tab>
+    </dxi-item>
 
-    <dxi-tab>
+  </dx-form>
 
-
-      <app-entity-search
-        entityType="Employee"
-        [properties]="['firstName']">
-      </app-entity-search>
-    </dxi-tab>
-
-  </dxi-item>
-
-</dx-form>
+</dx-scroll-view>
