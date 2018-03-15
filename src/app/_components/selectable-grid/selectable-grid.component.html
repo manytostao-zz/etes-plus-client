@@ -21,7 +21,7 @@
   </dxo-scrolling>
 
   <dxo-selection
-    mode="multiple"
+    [mode]="multipleSelection ? 'multiple': 'single'"
     selectAllMode="page"
     showCheckBoxesMode="none">
   </dxo-selection>
