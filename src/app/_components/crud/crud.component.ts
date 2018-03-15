@@ -23,75 +23,90 @@ import {BaseEntity} from '../../_model';
   styleUrls: ['./crud.component.scss']
 })
 export class CrudComponent implements OnInit {
+
   /**
    * Define el campo clave para ser utilizado por el componente {@link SelectableGridComponent}
    * @type {string}
    */
   @Input() keyField: string;
+
   /**
    * Define el tipo de las entidades que manejará el {@link CrudComponent}
    * @type {string}
    */
   @Input() entityType: string;
+
   /**
    * Define si el dx-grid del componente {@link SelectableGridComponent} será de múltiple selección
    * @type {boolean}
    */
   @Input() multipleSelection = true;
+
   /**
    * Define si serán mostrados los botones por defecto del componente {@link ToolbarComponent}
    * @type {boolean}
    */
   @Input() showToolbarDefaultButtons = true;
+
   /**
    * Define si será mostrado el botón *Aceptar* en el componente {@link ToolbarComponent}
    * @type {boolean}
    */
   @Input() showToolbarAcceptButton = false;
+
   /**
    * Define si será mostrado el botón *Cancelar* en el componente {@link ToolbarComponent}
    * @type {boolean}
    */
   @Input() showToolbarCancelButton = false;
+
   /**
    * Define si será mostrado el botón *Adicionar* en el componente {@link ToolbarComponent}
    * @type {boolean}
    */
   @Input() showToolbarAddButton = true;
+
   /**
    * Define si será mostrado el botón *Editar* en el componente {@link ToolbarComponent}
    * @type {boolean}
    */
   @Input() showToolbarEditButton = true;
+
   /**
    * Define si será mostrado el botón *Eliminar* en el componente {@link ToolbarComponent}
    * @type {boolean}
    */
   @Input() showToolbarRemoveButton = true;
+
   /**
    * Define las clases CSS a utilizar por el componente {@link ToolbarComponent}
    * @type {string}
    */
   @Input() toolbarCssClass: string;
+
   /**
    * Define los elementos (botones, etc.) que contendrá el componente {@link ToolbarComponent}
    * @type {any[]}
    */
   @Input() toolbarItems: any[] = [];
+
   /**
    * Define la colección de entidades que listará el componente {@link SelectableGridComponent}
    * @type {LinkedList<BaseEntity>}
    */
   @Input() entitiesList = new Collections.LinkedList<BaseEntity>();
+
   /**
    * Evento lanzado cuando se interactúa con los elementos del {@link ToolbarComponent}
    * @type {EventEmitter<{type: string; selectedEntities: BaseEntity[]}>}
    */
   @Output() onToolbarItemClicked = new EventEmitter<{ type: string, selectedEntities: BaseEntity[] }>();
+
   /**
    * Contiene el listado de entidades seleccionadas en el componente {@link SelectableGridComponent}
    */
   selectedEntities: BaseEntity[];
+
   /**
    * Contiene la entidad suministrada al componente {@link AddEditComponent}
    */
