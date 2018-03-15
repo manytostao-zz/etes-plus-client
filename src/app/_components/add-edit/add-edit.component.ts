@@ -46,7 +46,7 @@ export class AddEditComponent implements OnInit {
   }
 
   /**
-   * Extrae los metadatos de la entidad que controla y los carga en {@link | entityMetadata}
+   * Extrae los metadatos de la entidad que controla y los carga en {@link AddEditComponent#entityMetadata}
    */
   extractEntityMetadata() {
     for (const field in this.entity) {
