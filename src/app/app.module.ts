@@ -23,6 +23,7 @@ import {ToolbarComponent} from './_components/toolbar/toolbar.component';
 import {SelectableGridComponent} from './_components/selectable-grid/selectable-grid.component';
 import {AddEditComponent} from './_components/add-edit/add-edit.component';
 import {CrudTestComponent} from './crud-test/crud-test.component';
+import {EntityFieldComponent} from './_components/entity-field/entity-field.component';
 
 import {
   AppAsideComponent,
@@ -57,7 +58,8 @@ const APP_COMPONENTS = [
   ToolbarComponent,
   SelectableGridComponent,
   AddEditComponent,
-  CrudTestComponent
+  CrudTestComponent,
+  EntityFieldComponent
 ];
 
 // Import directives
@@ -84,6 +86,7 @@ import {TabsModule} from 'ngx-bootstrap/tabs';
 import {ChartsModule} from 'ng2-charts/ng2-charts';
 import {DevExtremeModule} from 'devextreme-angular';
 import {ButtonsModule} from 'ngx-bootstrap';
+
 
 @NgModule({
   imports: [
