@@ -24,13 +24,6 @@ export const routes: Routes = [
     data: {
       title: 'CRUD Test'
     }
-  },
-  {
-    path: 'entity-search-test',
-    component: EntitySearchComponent,
-    data: {
-      title: 'EntityS. Test'
-    }
   }
 ];
 
