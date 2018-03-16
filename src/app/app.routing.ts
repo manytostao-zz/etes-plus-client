@@ -1,8 +1,9 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 
 import {DashboardComponent} from './_components/dashboard/dashboard.component';
 import {CrudTestComponent} from './crud-test/crud-test.component';
+import {EntitySearchComponent} from './_components/entity-search/entity-search.component'
 
 export const routes: Routes = [
   {
@@ -27,7 +28,8 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule {
+}
