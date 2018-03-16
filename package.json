@@ -12,7 +12,10 @@
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "doc:build": "compodoc -p src/tsconfig.app.json",
+    "doc:serve": "compodoc -s",
+    "doc:buildandserve": "compodoc -p src/tsconfig.app.json -s"
   },
   "private": true,
   "dependencies": {
@@ -36,7 +39,7 @@
     "moment": "2.20.1",
     "ng2-charts": "1.6.0",
     "ngx-bootstrap": "2.0.2",
-    "node-sass": "^4.7.2",
+    "node-sass": "^4.8.1",
     "reflect-metadata": "^0.1.12",
     "rxjs": "5.5.6",
     "simple-line-icons": "^2.4.1",
@@ -48,6 +51,7 @@
     "@angular/cli": "1.6.7",
     "@angular/compiler-cli": "5.2.3",
     "@angular/language-service": "5.2.3",
+    "@compodoc/compodoc": "^1.0.9",
     "@types/jasmine": "2.8.6",
     "@types/jasminewd2": "2.0.3",
     "@types/node": "9.4.0",

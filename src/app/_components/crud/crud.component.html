@@ -1,9 +1,15 @@
 <app-toolbar
-  [class]="toolbarClass"
+  [cssClass]="toolbarCssClass"
   [items]="toolbarItems"
-  [crudToolbar]="true"
+  [inCrud]="true"
+  [showDefaultButtons]="showToolbarDefaultButtons"
+  [showAcceptButton]="showToolbarAcceptButton"
+  [showCancelButton]="showToolbarCancelButton"
+  [showAddButton]="showToolbarAddButton"
+  [showEditButton]="showToolbarEditButton"
+  [showRemoveButton]="showToolbarRemoveButton"
   [selectedEntities]="selectedEntities"
-  (onToolbarItemClickedEvent)="handleToolbarItemClicked($event)">
+  (onToolbarItemClickedEvent)="handleToolbarItemClickedEvent($event)">
 </app-toolbar>
 
 <br>
@@ -11,6 +17,7 @@
 <app-selectable-grid
   [keyField]="keyField"
   [entitiesList]="entitiesList"
+  [multipleSelection]="multipleSelection"
   (onEntitiesSelectedEvent)="handleEntitiesSelectedEvent($event)">
 </app-selectable-grid>
 
