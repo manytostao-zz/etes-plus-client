@@ -1,18 +1,16 @@
 import {Component, Input, ViewChild} from '@angular/core';
 
-import {Employee} from '../../crud-test/model/employee.model';
 import {BaseEntity} from '../../_model';
-
 
 /**
  * Componente que permite acceder al crud de la entitdad, o crear una nueva entidad
  *
  * @example
  *
- *  <app-entity-search
- *    entityType="Employee"
- *    [properties]="['code']">
- *  </app-entity-search>
+ * <app-entity-search
+ *             entityType="Employee"
+ *             [properties]="['code']">
+ * </app-entity-search>
  */
 @Component({
   selector: 'app-entity-search',
