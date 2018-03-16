@@ -1,6 +1,4 @@
 import {Component, Input, ViewChild} from '@angular/core';
-
-import {Employee} from '../../crud-test/model/employee.model';
 import {BaseEntity} from '../../_model';
 
 
