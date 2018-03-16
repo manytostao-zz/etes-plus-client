@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import {BaseEntity} from '../../_model';
 
-export class Employee extends BaseEntity{
+export class Employee extends BaseEntity {
 
   @Reflect.metadata('listable', true)
   @Reflect.metadata('category', 'general')
@@ -33,13 +33,16 @@ export class Employee extends BaseEntity{
   @Reflect.metadata('group', 'dates')
   hireDate: Date;
 
+  @Reflect.metadata('listable', true)
   @Reflect.metadata('category', 'others')
   @Reflect.metadata('group', 'textarea')
+  @Reflect.metadata('widget', 'textarea')
   notes: string;
 
   @Reflect.metadata('listable', true)
   @Reflect.metadata('category', 'others')
   @Reflect.metadata('group', 'textarea')
+  @Reflect.metadata('widget', 'textarea')
   address: string;
 
   @Reflect.metadata('listable', true)
@@ -47,6 +50,7 @@ export class Employee extends BaseEntity{
   state: string;
 
   @Reflect.metadata('category', 'others')
+  @Reflect.metadata('widget', 'entitySearch')
   city: string;
 
 

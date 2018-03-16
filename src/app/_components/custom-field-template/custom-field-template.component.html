@@ -1,0 +1,25 @@
+<div
+  *ngFor="let field of fields">
+
+  <div *dxTemplate="let data of field + 'Template'">
+
+    <div [ngSwitch]="widget">
+
+      <dx-text-area
+        *ngSwitchCase="'textarea'"
+        [(value)]="entity[field]"
+        [disabled]="disabled">
+      </dx-text-area>
+
+      <app-entity-search
+        *ngSwitchCase="'entitySearch'"
+        [entityType]="entity.constructor.name"
+        [properties]="['firstName']"
+        [disabled]="disabled">
+      </app-entity-search>
+
+    </div>
+
+  </div>
+
+</div>
