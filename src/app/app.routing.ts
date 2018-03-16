@@ -17,6 +17,13 @@ export const routes: Routes = [
     data: {
       title: 'Dashboard'
     }
+  },
+  {
+    path: 'crud-test',
+    component: CrudTestComponent,
+    data: {
+      title: 'CRUD Test'
+    }
   }
 ];
 
