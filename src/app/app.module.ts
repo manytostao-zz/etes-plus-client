@@ -85,6 +85,7 @@ import {TabsModule} from 'ngx-bootstrap/tabs';
 import {ChartsModule} from 'ng2-charts/ng2-charts';
 import {DevExtremeModule} from 'devextreme-angular';
 import {ButtonsModule} from 'ngx-bootstrap';
+import { CustomFieldTemplateComponent } from './_components/custom-field-template/custom-field-template.component';
 
 @NgModule({
   imports: [
@@ -101,7 +102,8 @@ import {ButtonsModule} from 'ngx-bootstrap';
     AppComponent,
     ...APP_CONTAINERS,
     ...APP_COMPONENTS,
-    ...APP_DIRECTIVES
+    ...APP_DIRECTIVES,
+    CustomFieldTemplateComponent
   ],
   providers: [{
     provide: LocationStrategy,
