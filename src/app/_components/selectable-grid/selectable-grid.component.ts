@@ -1,6 +1,7 @@
-import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
+import {Component, Input, OnChanges} from '@angular/core';
 import * as Collections from 'typescript-collections';
 
+import {CrudService} from '../crud/crud.service';
 import {BaseEntity} from '../../_model';
 
 @Component({
@@ -12,12 +13,11 @@ export class SelectableGridComponent implements OnChanges {
   @Input() keyField: string;
   @Input() multipleSelection = true;
   @Input() entitiesList = new Collections.LinkedList<BaseEntity>();
-  @Output() onEntitiesSelectedEvent = new EventEmitter<any[]>();
   listableArray: any[] = [];
   columns: any[] = [];
   selectedEntities: any[] = [];
 
-  constructor() {
+  constructor(private crudService: CrudService) {
   }
 
   ngOnChanges() {
@@ -48,7 +48,7 @@ export class SelectableGridComponent implements OnChanges {
 
   handleSelectionChangedEvent(e) {
     this.selectedEntities = e.selectedRowsData;
-    this.onEntitiesSelectedEvent.emit(this.selectedEntities);
+    this.crudService.onEntitySelected.emit(this.selectedEntities);
   }
 
   handleContentReadyEvent(e) {

@@ -42,14 +42,13 @@ export class AddEditComponent implements OnInit {
    * Contiene metadatos de las propiedades de la entidad que controla relacionados con su control visual
    * @type {Dictionary<string, Dictionary<string, string[]>>}
    */
-  fieldsWidgetsMetadata = new Collections.Dictionary<string, string[]>();
+  fieldsWidgetsMetadata = new Collections.Dictionary<string, Collections.Dictionary<string, any>>();
 
   /**
    * Inicializa el componente
    */
   ngOnInit() {
     this.extractEntityMetadata();
-    console.log(this.fieldsWidgetsMetadata);
   }
 
   /**
@@ -81,17 +80,21 @@ export class AddEditComponent implements OnInit {
           }
         }
         if (Reflect.hasMetadata('widget', this.entity, field)) {
-          const widgetName = Reflect.getMetadata('widget', this.entity, field);
-          if (!this.fieldsWidgetsMetadata.containsKey(widgetName)) {
-            this.fieldsWidgetsMetadata.setValue(Reflect.getMetadata('widget', this.entity, field), [field]);
-          } else {
-            this.fieldsWidgetsMetadata.getValue(widgetName).push(field);
+          const widget = Reflect.getMetadata('widget', this.entity, field);
+          if (!this.fieldsWidgetsMetadata.containsKey(widget.name)) {
+            this.fieldsWidgetsMetadata.setValue(widget.name, new Collections.Dictionary<string, any>());
           }
+          this.fieldsWidgetsMetadata.getValue(widget.name).setValue(field, widget.options !== undefined ? widget.options : null);
         }
       }
     }
   }
 
+  /**
+   * Retorna el nombre que tendrá la plantilla que se empleará para gestionar el valor de campo
+   * @param {string} field
+   * @returns {string}
+   */
   getTemplateNameByField(field: string) {
     if (Reflect.hasMetadata('widget', this.entity, field)) {
       const widgetName = Reflect.getMetadata('widget', this.entity, field);

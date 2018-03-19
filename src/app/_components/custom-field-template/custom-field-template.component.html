@@ -1,5 +1,5 @@
 <div
-  *ngFor="let field of fields">
+  *ngFor="let field of fields.keys()">
 
   <div *dxTemplate="let data of field + 'Template'">
 
@@ -13,8 +13,9 @@
 
       <app-entity-search
         *ngSwitchCase="'entitySearch'"
-        [entityType]="entity.constructor.name"
-        [properties]="['firstName']"
+        [entityType]="fields.getValue(field).entityType"
+        [(selectedEntity)]="entity[field]"
+        [properties]="fields.getValue(field).properties"
         [disabled]="disabled">
       </app-entity-search>
 
