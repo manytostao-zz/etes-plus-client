@@ -66,6 +66,24 @@ export class EntitySearchComponent {
   addEditPopupVisible = false;
 
   /**
+   * Define si será mostrado el botón *Agregar* en el componente
+   * @type {boolean}
+   */
+  @Input() showAddButton = false;
+
+  /**
+   * Define si será mostrado el botón *Buscar* en el componente
+   * @type {boolean}
+   */
+  @Input() showSearchButton = false;
+
+  /**
+   * Define si será mostrado el botón *Eliminar* en el componente
+   * @type {boolean}
+   */
+  @Input() showRemoveButton = false;
+
+  /**
    * Emite hacia un componente externo la entidad seleccionada
    * @type {EventEmitter<string>}
    */
@@ -85,7 +103,7 @@ export class EntitySearchComponent {
             this.entitySearchTextBox.value += ' - ' + this.selectedEntity[this.properties[i]];
           }
         }
-        this.onSelectedEnitityClickedEvent.emit($event.selectedEntities[0]) ;
+        this.onSelectedEnitityClickedEvent.emit($event.selectedEntities[0]);
         this.crudPopupVisible = false;
         break;
       default:
