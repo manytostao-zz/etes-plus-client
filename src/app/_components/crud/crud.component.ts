@@ -1,6 +1,7 @@
 import {Component, Input, Output, OnInit, EventEmitter} from '@angular/core';
 import * as Collections from 'typescript-collections';
 
+import {CrudService} from './crud.service';
 import {BaseEntity} from '../../_model';
 
 /**
@@ -20,7 +21,8 @@ import {BaseEntity} from '../../_model';
 @Component({
   selector: 'app-crud',
   templateUrl: './crud.component.html',
-  styleUrls: ['./crud.component.scss']
+  styleUrls: ['./crud.component.scss'],
+  providers: [CrudService]
 })
 export class CrudComponent implements OnInit {
 
@@ -111,28 +113,40 @@ export class CrudComponent implements OnInit {
    * Contiene la entidad suministrada al componente {@link AddEditComponent}
    */
   addEditEntity: any;
+
   /**
    * Controla si se muestra la ventana modal que contiene un componente {@link AddEditComponent} para editar o adicionar una entidad
    * @type {boolean}
    */
   popupVisible = false;
 
-  ngOnInit() {
-    if (this.entityType === '' && this.entitiesList.size() > 0) {
-      this.entityType = this.entitiesList.first().constructor.name;
-    }
+  /**
+   * Constructor del componente
+   * @param {CrudService} crudService
+   */
+  constructor(private crudService: CrudService) {
   }
 
   /**
-   * Maneja la suscripción al evento onEntitiesSelected del componente {@link SelectableGridComponent}
-   * @param $event
+   * Inicializa el componente
    */
-  handleEntitiesSelectedEvent($event: any) {
-    this.selectedEntities = $event;
-    if (this.selectedEntities.length === 1) {
-      this.addEditEntity = this.selectedEntities[0];
-    } else {
-      this.addEditEntity = undefined;
+  ngOnInit() {
+
+    this.crudService.onEntitySelected.subscribe(
+      (selectedEntities: BaseEntity[]) => {
+        this.selectedEntities = selectedEntities;
+        if (this.selectedEntities.length === 1) {
+          this.addEditEntity = this.selectedEntities[0];
+        } else {
+          this.addEditEntity = undefined;
+        }
+      }
+    );
+
+    this.entitiesList = this.crudService.getEntitiesList(this.entityType);
+
+    if (this.entityType === '' && this.entitiesList.size() > 0) {
+      this.entityType = this.entitiesList.first().constructor.name;
     }
   }
 
@@ -142,6 +156,11 @@ export class CrudComponent implements OnInit {
    */
   handleToolbarItemClickedEvent($event: string) {
     switch ($event) {
+      case 'add':
+        this.addEditEntity = new BaseEntity(null);
+        this.popupVisible = true;
+        this.onToolbarItemClicked.emit({type: $event, selectedEntities: this.selectedEntities});
+        break;
       case 'edit':
         this.addEditEntity = this.selectedEntities[0];
         this.popupVisible = true;
