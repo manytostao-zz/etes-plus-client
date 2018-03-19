@@ -12,7 +12,7 @@ import {BaseEntity} from '../_model';
 export class CrudTestComponent implements OnInit {
   toolbarItems: any[] = [];
   entitiesList = new Collections.LinkedList<BaseEntity>();
-  entityType = '';
+  entityType = 'Employee';
 
   constructor() {
   }
@@ -50,57 +50,6 @@ export class CrudTestComponent implements OnInit {
         ]
       }
     ];
-
-    this.entitiesList.add(
-      new Employee(
-        '1',
-        'Osmany',
-        'Torres Leyva',
-        'Mr.',
-        'CEO',
-        'adasdasdwqer',
-        new Date(),
-        new Date(),
-        'Notas',
-        '31A #2609',
-        'Playa',
-        'La Habana'
-      )
-    );
-
-    this.entitiesList.add(
-      new Employee(
-        '2',
-        'Ana Liz',
-        'García Meriño',
-        'Ms.',
-        'CGO',
-        'adasdasdwqer',
-        new Date(),
-        new Date(),
-        'Notas',
-        '31A #2609',
-        'Playa',
-        'La Habana'
-      )
-    );
-
-    this.entitiesList.add(
-      new Employee(
-        '3',
-        'Oscar',
-        'Torres Leyva',
-        'Mr.',
-        'CDO',
-        'adasdasdwqer',
-        new Date(),
-        new Date(),
-        'Notas',
-        '31A #2609',
-        'Playa',
-        'La Habana'
-      )
-    );
   }
 
 }
