@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 
 import {BaseEntity} from '../../_model';
+import * as Collections from 'typescript-collections';
 
 /**
  * Componente que genera dinámicamente un control visual de formulario para la edición del valor de la propiedad de una entidad
@@ -8,9 +9,8 @@ import {BaseEntity} from '../../_model';
  * @example
  *
  * <app-custom-field-template
- *             *ngFor="let widget of fieldsWidgetsMetadata.keys()"
  *             [widget]="widget"
- *             [fields]="fieldsWidgetsMetadata.getValue(widget)"
+ *             [fields]="fields"
  *             [(entity)]="entity"
  *             [disabled]="!editable">
  * </app-custom-field-template>
@@ -38,10 +38,14 @@ export class CustomFieldTemplateComponent {
    * Define los campos a los que se le generará el control definido en el [widget]{@link CustomFieldTemplateComponent#widget}
    * @type {string[]}
    */
-  @Input() fields: string[];
+  @Input() fields = new Collections.Dictionary<string, any>();
 
   /**
    * Define la entidad a la cual se le modificarán los [fields]{@link CustomFieldTemplateComponent#fields}
    */
   @Input() entity: BaseEntity;
+
+  constructor(private crudService) {
+  }
+
 }
