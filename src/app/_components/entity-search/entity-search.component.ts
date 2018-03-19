@@ -1,4 +1,4 @@
-import {Component, Input, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {BaseEntity} from '../../_model';
 
 
@@ -66,6 +66,12 @@ export class EntitySearchComponent {
   addEditPopupVisible = false;
 
   /**
+   * Emite hacia un componente externo la entidad seleccionada
+   * @type {EventEmitter<string>}
+   */
+  @Output() onSelectedEnitityClickedEvent = new EventEmitter<string>();
+
+  /**
    *  Maneja la suscripción al evento (onToolbarItemClicked) del componente (@link CrudComponent)
    * @param $event
    */
@@ -79,6 +85,7 @@ export class EntitySearchComponent {
             this.entitySearchTextBox.value += ' - ' + this.selectedEntity[this.properties[i]];
           }
         }
+        this.onSelectedEnitityClickedEvent.emit($event.selectedEntities[0]) ;
         this.crudPopupVisible = false;
         break;
       default:
