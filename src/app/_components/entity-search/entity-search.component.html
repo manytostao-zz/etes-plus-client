@@ -1,6 +1,6 @@
 <div class="dx-field">
 
-  <dx-text-box [disabled]="disabled" class="float-left" style="width: 50%" #entitySearchTextBox></dx-text-box>
+  <dx-text-box [disabled]="disabled" class="float-left" style="width: 50%" [value]="getTextBoxDisplayValue()" #entitySearchTextBox></dx-text-box>
   <dx-button [disabled]="disabled" class="float-left" icon="add" (onClick)="createEntity(entityType)"></dx-button>
   <dx-button [disabled]="disabled" class="float-left" icon="search" (onClick)="searchEntity(entityType)"></dx-button>
   <dx-button [disabled]="disabled" class="float-left" icon="trash" (onClick)="removeEntity()"></dx-button>
@@ -9,20 +9,24 @@
 
 <dx-popup
   [(visible)]="crudPopupVisible"
-  [title]="'Edit ' + entityType">
+  [title]="'Select ' + entityType">
 
   <div *dxTemplate="let data of 'content'">
 
-    <app-crud
-      [entityType]="entityType"
-      [entitiesList]="entitiesList"
-      [multipleSelection]="false"
-      (onToolbarItemClicked)="handleToolbarItemClickedEvent($event)"
-      [toolbarItems]="toolbarItems"
-      [showToolbarAcceptButton]="true"
-      [showToolbarCancelButton]="true"
-      toolbarClass="navbar navbar-expand-lg navbar-light bg-light">
-    </app-crud>
+    <dx-scroll-view
+      showScrollbar="onHover">
+
+      <app-crud
+        [entityType]="entityType"
+        [multipleSelection]="false"
+        (onToolbarItemClicked)="handleToolbarItemClickedEvent($event)"
+        [toolbarItems]="toolbarItems"
+        [showToolbarAcceptButton]="true"
+        [showToolbarCancelButton]="true"
+        toolbarClass="navbar navbar-expand-lg navbar-light bg-light">
+      </app-crud>
+
+    </dx-scroll-view>
 
   </div>
 
@@ -34,11 +38,15 @@
 
   <div *dxTemplate="let data of 'content'">
 
-    <app-add-edit
-      *ngIf="selectedEntities != undefined && selectedEntities != [] && selectedEntities.length == 1"
-      [entity]="addEditEntity"
-      [editable]="true">
-    </app-add-edit>
+    <dx-scroll-view
+      showScrollbar="onHover">
+
+      <app-add-edit
+        [entity]="addEditEntity"
+        [editable]="true">
+      </app-add-edit>
+
+    </dx-scroll-view>
 
   </div>
 

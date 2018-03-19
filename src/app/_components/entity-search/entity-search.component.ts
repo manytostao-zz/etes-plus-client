@@ -1,6 +1,7 @@
-import {Component, Input, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 
 import {BaseEntity} from '../../_model';
+import {Certificate} from '../../crud-test/model/certificate.model';
 
 /**
  * Componente que permite acceder al crud de la entitdad, o crear una nueva entidad
@@ -9,7 +10,8 @@ import {BaseEntity} from '../../_model';
  *
  * <app-entity-search
  *             entityType="Employee"
- *             [properties]="['code']">
+ *             [properties]="['code']"
+ *             [entityType]="'Certificate'">
  * </app-entity-search>
  */
 @Component({
@@ -26,41 +28,40 @@ export class EntitySearchComponent {
   @Input() entityType: string;
 
   /**
-   * Define si el campo entity-search se mostrará editable o no
+   * Define si el componente {@link EntitySearchComponent} se mostrará editable
    * @type (boolean)
    */
   @Input() disabled: boolean;
 
   /**
-   * Define las propiedes de la entidad que requiere se muestren en input del entity-search
+   * Define las propiedades de la entidad que requiere se muestren en input del {@link EntitySearchComponent}
    * @type {[string,string]}
    */
   @Input() properties: any[] = ['code', 'description'];
 
-
   /**
-   *  Define el nombre del input, con el cual se hace el binding entre la vista y el componente.
+   *  Referencia al elemento input de la vista
    */
   @ViewChild('entitySearchTextBox') entitySearchTextBox;
 
   /**
-   * Almacena las propiedades de la entidad que te envian como parámetro al utilizar el componente entity-search
+   * Contiene la entidad seleccionada en el componente {@link CrudComponent} que maneja el {@link EntitySearchComponent}
    */
-  selectedEntity: BaseEntity;
+  @Input() selectedEntity: BaseEntity;
 
   /**
-   * Recibe la entidad para manejar el componente entity-search
+   * Define la entidad que controla el el componente {@link AddEditComponent} que maneja el {@link EntitySearchComponent}
    */
   addEditEntity: any;
 
   /**
-   *  Define la visibilidad del popup que muestra el crud. Por defecto si inicializa en false.
+   *  Controla si se muestra la ventana modal que contiene un componente {@link CrudComponent} para seleccionar una entidad
    * @type {boolean}
    */
   crudPopupVisible = false;
 
   /**
-   * Define la visibilidad del popup que muestra el addEdit. Por defecto si inicializa en false.
+   * Controla si se muestra la ventana modal que contiene un componente {@link AddEditComponent} para adicionar una entidad
    * @type {boolean}
    */
   addEditPopupVisible = false;
@@ -73,12 +74,9 @@ export class EntitySearchComponent {
     switch ($event.type) {
       case 'accept':
         this.selectedEntity = $event.selectedEntities[0];
-        this.entitySearchTextBox.value = this.selectedEntity[this.properties[0]];
-        if (this.properties.length > 1) {
-          for (let i = 1; i < this.properties.length; i++) {
-            this.entitySearchTextBox.value += ' - ' + this.selectedEntity[this.properties[i]];
-          }
-        }
+        this.crudPopupVisible = false;
+        break;
+      case 'cancel':
         this.crudPopupVisible = false;
         break;
       default:
@@ -87,22 +85,42 @@ export class EntitySearchComponent {
   }
 
   /**
-   * Método que maneja la operación de crear una nueva entidad.
+   * Crea una nueva entidad y abre el modal con el componente {@link AddEditComponent}
    */
   createEntity() {
+    this.addEditEntity = new Certificate(
+      null,
+      null,
+      null);
+    this.addEditPopupVisible = true;
   }
 
   /**
-   * Método que maneja la operación de abrir el crud de la entidad.
+   * Abre el modal con el componente {@link CrudComponent}
    */
   searchEntity() {
     this.crudPopupVisible = true;
   }
 
   /**
-   * Método que maneja la operación de abrir el limpiar el input.
+   * Limpia la entidad seleccionada
    */
   removeEntity() {
     this.entitySearchTextBox.value = undefined;
+  }
+
+
+  getTextBoxDisplayValue() {
+    let displayValue = '';
+    if (this.selectedEntity !== undefined && this.selectedEntity !== null) {
+      if (this.properties.length > 1) {
+        for (let i = 1; i < this.properties.length; i++) {
+          displayValue += ' - ' + this.selectedEntity[this.properties[i]];
+        }
+      } else {
+        displayValue = this.selectedEntity[this.properties[0]];
+      }
+    }
+    return displayValue;
   }
 }

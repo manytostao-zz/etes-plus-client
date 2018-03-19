@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 import {BaseEntity} from '../../_model';
+import {Certificate} from './certificate.model';
 
 export class Employee extends BaseEntity {
 
@@ -36,22 +37,37 @@ export class Employee extends BaseEntity {
   @Reflect.metadata('listable', true)
   @Reflect.metadata('category', 'others')
   @Reflect.metadata('group', 'textarea')
-  @Reflect.metadata('widget', 'textarea')
+  @Reflect.metadata('widget',
+    {
+      name: 'textarea'
+    })
   notes: string;
 
   @Reflect.metadata('listable', true)
   @Reflect.metadata('category', 'others')
   @Reflect.metadata('group', 'textarea')
-  @Reflect.metadata('widget', 'textarea')
+  @Reflect.metadata('widget',
+    {
+      name: 'textarea'
+    })
   address: string;
 
-  @Reflect.metadata('listable', true)
   @Reflect.metadata('category', 'others')
   state: string;
 
   @Reflect.metadata('category', 'others')
-  @Reflect.metadata('widget', 'entitySearch')
   city: string;
+
+  @Reflect.metadata('category', 'general')
+  @Reflect.metadata('widget',
+    {
+      name: 'entitySearch',
+      options: {
+        entityType: 'Certificate',
+        properties: ['title']
+      }
+    })
+  certificate: Certificate;
 
 
   constructor(id: string,
@@ -65,7 +81,8 @@ export class Employee extends BaseEntity {
               notes: string,
               address: string,
               state: string,
-              city: string) {
+              city: string,
+              certificate: Certificate) {
     super(id);
     this.firstName = firstName;
     this.lastName = lastName;
@@ -77,6 +94,7 @@ export class Employee extends BaseEntity {
     this.notes = notes;
     this.address = address;
     this.state = state;
-    this.city = city
+    this.city = city;
+    this.certificate = certificate;
   }
 }
