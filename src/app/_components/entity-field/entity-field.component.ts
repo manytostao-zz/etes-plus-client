@@ -7,11 +7,23 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./entity-field.component.scss']
 })
 export class EntityFieldComponent implements OnInit {
-
+  /**
+   *  Define la localización de la entidad.
+   * @type {string}
+   */
   @Input() entityLocation = '../../crud-test/model/employee.model';
+
+  /**
+   *  Define el nombre de la entidad.
+   * @type {string}
+   */
   @Input() entityName = 'Employee';
+
+  /**
+   * Define el datasource que recibe el lookup
+   */
   dataSourceTreeEntityField: any;
-  private widgetInstance: any;
+
 
   constructor() {
   }
@@ -22,6 +34,10 @@ export class EntityFieldComponent implements OnInit {
 
   }
 
+  /**
+   * Muestra en el input del {@link EntityFieldComponent} los valores de las propiedades de la entidad pasada como parámetros.
+   * @returns {Promise<void>}
+   */
   async getTextBoxDisplayValue() {
     let url = this.entityLocation;
     let widgets;
@@ -44,8 +60,9 @@ export class EntityFieldComponent implements OnInit {
       widgets = await import(`./${url}`);
     }
 
-    this.widgetInstance = new widgets[this.entityName]();
-    this.dataSourceTreeEntityField = Object.getOwnPropertyNames(this.widgetInstance);
+    let widgetInstance;
+    widgetInstance = new widgets[this.entityName]();
+    this.dataSourceTreeEntityField = Object.getOwnPropertyNames(widgetInstance);
 
   }
 
