@@ -45,7 +45,7 @@ export class CustomFieldTemplateComponent {
    */
   @Input() entity: BaseEntity;
 
-  constructor(private crudService) {
+  constructor() {
   }
 
 }
