@@ -67,6 +67,24 @@ export class EntitySearchComponent {
   addEditPopupVisible = false;
 
   /**
+   * Define si será mostrado el botón *Agregar* en el componente
+   * @type {boolean}
+   */
+  @Input() showAddButton = true;
+
+  /**
+   * Define si será mostrado el botón *Buscar* en el componente
+   * @type {boolean}
+   */
+  @Input() showSearchButton = true;
+
+  /**
+   * Define si será mostrado el botón *Eliminar* en el componente
+   * @type {boolean}
+   */
+  @Input() showRemoveButton = true;
+
+  /**
    *  Maneja la suscripción al evento (onToolbarItemClicked) del componente (@link CrudComponent)
    * @param $event
    */
@@ -103,13 +121,16 @@ export class EntitySearchComponent {
   }
 
   /**
-   * Limpia la entidad seleccionada
+   * Limpia la entidad seleccionada.
    */
   removeEntity() {
     this.entitySearchTextBox.value = undefined;
   }
 
-
+  /**
+   * Muestra en el input del {@link EntitySearchComponent} los valores de las propiedades pasadas como parámetros.ng
+   * @returns {string}
+   */
   getTextBoxDisplayValue() {
     let displayValue = '';
     if (this.selectedEntity !== undefined && this.selectedEntity !== null) {
