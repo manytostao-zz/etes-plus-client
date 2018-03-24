@@ -1,5 +1,5 @@
 <div
-  *ngFor="let field of fields">
+  *ngFor="let field of fields.keys()">
 
   <div *dxTemplate="let data of field + 'Template'">
 
@@ -12,11 +12,18 @@
       </dx-text-area>
 
       <app-entity-search
-        *ngSwitchCase="'entitySearch'"
-        [entityType]="entity.constructor.name"
-        [properties]="['firstName']"
+        *ngSwitchCase="'entity-search'"
+        [entityType]="fields.getValue(field).entityType"
+        [(selectedEntity)]="entity[field]"
+        [properties]="fields.getValue(field).properties"
         [disabled]="disabled">
       </app-entity-search>
+
+      <app-crud
+        *ngSwitchCase="'detail'"
+        toolbarCssClass="navbar navbar-expand-lg navbar-light bg-light"
+        [entityType]="fields.getValue(field).entityType">
+      </app-crud>
 
     </div>
 
