@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 import {BaseEntity} from '../../_model';
 import * as Collections from 'typescript-collections';
@@ -44,8 +44,5 @@ export class CustomFieldTemplateComponent {
    * Define la entidad a la cual se le modificarán los [fields]{@link CustomFieldTemplateComponent#fields}
    */
   @Input() entity: BaseEntity;
-
-  constructor() {
-  }
 
 }

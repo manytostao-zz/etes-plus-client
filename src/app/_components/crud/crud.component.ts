@@ -132,6 +132,8 @@ export class CrudComponent implements OnInit {
    */
   ngOnInit() {
 
+    this.crudService.entityType = this.entityType;
+
     this.crudService.onEntitySelected.subscribe(
       (selectedEntities: BaseEntity[]) => {
         this.selectedEntities = selectedEntities;
@@ -143,7 +145,7 @@ export class CrudComponent implements OnInit {
       }
     );
 
-    this.entitiesList = this.crudService.getEntitiesList(this.entityType);
+    this.entitiesList = this.crudService.getEntitiesList();
 
     if (this.entityType === '' && this.entitiesList.size() > 0) {
       this.entityType = this.entitiesList.first().constructor.name;
