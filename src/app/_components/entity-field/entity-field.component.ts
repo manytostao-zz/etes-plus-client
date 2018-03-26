@@ -33,7 +33,7 @@ export class EntityFieldComponent implements OnInit {
    * Muestra en el input del {@link EntityFieldComponent} los valores de las propiedades de la entidad pasada como parámetros.
    * @returns {Promise<void>}
    */
-  async getTextBoxDisplayValue() {
+  getTextBoxDisplayValue() {
     let widgetInstance;
     widgetInstance = new ModelsClassesMap[this.entityName]();
     this.dataSourceTreeEntityField = Object.getOwnPropertyNames(widgetInstance);
