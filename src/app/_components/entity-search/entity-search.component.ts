@@ -124,13 +124,16 @@ export class EntitySearchComponent {
   }
 
   /**
-   * Limpia la entidad seleccionada
+   * Limpia la entidad seleccionada.
    */
   removeEntity() {
     this.entitySearchTextBox.value = undefined;
   }
 
-
+  /**
+   * Muestra en el input del {@link EntitySearchComponent} los valores de las propiedades pasadas como parámetros.ng
+   * @returns {string}
+   */
   getTextBoxDisplayValue() {
     let displayValue = '';
     if (this._selectedEntity !== undefined && this._selectedEntity !== null) {
