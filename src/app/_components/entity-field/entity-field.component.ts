@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import * as ModelsClassesMap from '../../_model/models-map';
+import * as ModelsClassesMap from '../../_model/model-map';
 
 @Component({
   selector: 'app-entity-field',
@@ -7,7 +7,7 @@ import * as ModelsClassesMap from '../../_model/models-map';
   styleUrls: ['./entity-field.component.scss']
 })
 export class EntityFieldComponent implements OnInit {
-  
+
   /**
    *  Define el nombre de la entidad.
    * @type {string}
