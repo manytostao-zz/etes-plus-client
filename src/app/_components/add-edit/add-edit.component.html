@@ -20,6 +20,7 @@
           <dxi-item
             *ngFor="let field of fieldsLocationMetadata.getValue(category).getValue(group)"
             [dataField]="field"
+            [colSpan]="fieldsWidgetsMetadata.getValue('detail') !== undefined && fieldsWidgetsMetadata.getValue('detail').containsKey(field) ? 2 : 1"
             [template]="getTemplateNameByField(field)"
             [disabled]="!editable">
           </dxi-item>
