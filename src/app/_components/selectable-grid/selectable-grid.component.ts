@@ -30,14 +30,17 @@ export class SelectableGridComponent implements OnChanges {
 
     for (const propertyKey in entity) {
       if (entity.hasOwnProperty(propertyKey)) {
-        if (Reflect.getMetadata('listable', entity, propertyKey) === true) {
-          let typeName = typeof entity[propertyKey];
-          if (typeName === 'object') {
-            typeName = entity[propertyKey].constructor.name;
+        if (Reflect.hasMetadata('listable', entity, propertyKey)) {
+          const listableMetadata = Reflect.getMetadata('listable', entity, propertyKey);
+          if (listableMetadata.value) {
+            let typeName = typeof entity[propertyKey];
+            if (typeName === 'object') {
+              typeName = entity[propertyKey].constructor.name;
+            }
+            const column = {name: propertyKey, type: typeName};
+            column['visible'] = listableMetadata.visible;
+            this.columns.push(column);
           }
-          const column = {name: propertyKey, type: typeName};
-          column['visible'] = Reflect.getMetadata('visible', entity, propertyKey);
-          this.columns.push(column);
         }
         if (Reflect.getMetadata('key', entity, propertyKey)) {
           this.keyField = propertyKey;
