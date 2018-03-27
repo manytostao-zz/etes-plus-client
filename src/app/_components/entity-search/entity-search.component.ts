@@ -88,6 +88,23 @@ export class EntitySearchComponent {
   }
 
   /**
+   * Define si será mostrado el botón *Agregar* en el componente
+   * @type {boolean}
+   */
+  @Input() showAddButton = true;
+
+  /**
+   * Define si será mostrado el botón *Buscar* en el componente
+   * @type {boolean}
+   */
+  @Input() showSearchButton = true;
+
+  /**
+   * Define si será mostrado el botón *Eliminar* en el componente
+   * @type {boolean}
+   */
+  @Input() showRemoveButton = true;
+  /**
    *  Maneja la suscripción al evento (onToolbarItemClicked) del componente (@link CrudComponent)
    * @param $event
    */
