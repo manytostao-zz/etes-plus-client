@@ -11,7 +11,6 @@ import {BaseEntity} from '../_model';
 })
 export class CrudTestComponent implements OnInit {
   toolbarItems: any[] = [];
-  entitiesList = new Collections.LinkedList<BaseEntity>();
   entityType = 'Employee';
 
   constructor() {
