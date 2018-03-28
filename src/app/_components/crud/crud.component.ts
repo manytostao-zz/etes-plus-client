@@ -92,11 +92,21 @@ export class CrudComponent implements OnInit {
    */
   @Input() toolbarItems: any[] = [];
 
-  /**
-   * Define la colección de entidades que listará el componente {@link SelectableGridComponent}
-   * @type {LinkedList<BaseEntity>}
-   */
-  @Input() entitiesList = new Collections.LinkedList<BaseEntity>();
+  private _entitiesList = new Collections.LinkedList<BaseEntity>();
+
+
+  @Input() get entitiesList() {
+
+    return this._entitiesList;
+  }
+
+  set entitiesList(value: any) {
+    this._entitiesList = value;
+    this.entitiesListChange.emit(this._entitiesList);
+  }
+
+  @Output() entitiesListChange = new EventEmitter<any>();
+
 
   /**
    * Evento lanzado cuando se interactúa con los elementos del {@link ToolbarComponent}
@@ -109,6 +119,11 @@ export class CrudComponent implements OnInit {
    */
   selectedEntities: BaseEntity[];
 
+  /**
+   *
+   * @type {boolean}
+   */
+  @Input() localData = false;
   /**
    * Contiene la entidad suministrada al componente {@link AddEditComponent}
    */
@@ -131,9 +146,6 @@ export class CrudComponent implements OnInit {
    * Inicializa el componente
    */
   ngOnInit() {
-
-    this.crudService.entityType = this.entityType;
-
     this.crudService.onEntitySelected.subscribe(
       (selectedEntities: BaseEntity[]) => {
         this.selectedEntities = selectedEntities;
@@ -144,8 +156,13 @@ export class CrudComponent implements OnInit {
         }
       }
     );
+    if (!this.localData) {
+      this.crudService.entityType = this.entityType;
 
-    this.entitiesList = this.crudService.getEntitiesList();
+
+      this.entitiesList = this.crudService.getEntitiesList();
+    }
+
 
     if (this.entityType === '' && this.entitiesList.size() > 0) {
       this.entityType = this.entitiesList.first().constructor.name;
