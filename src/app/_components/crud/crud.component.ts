@@ -92,19 +92,35 @@ export class CrudComponent implements OnInit {
    */
   @Input() toolbarItems: any[] = [];
 
+  /**
+   *  Contiene el listado de las entidades que se van a mostrar en el grid.
+   * @type {LinkedList<BaseEntity>}
+   * @private
+   */
   private _entitiesList = new Collections.LinkedList<BaseEntity>();
 
-
+  /**
+   *
+   * @ignore
+   */
   @Input() get entitiesList() {
 
     return this._entitiesList;
   }
 
+  /**
+   *
+   * @ignore
+   */
   set entitiesList(value: any) {
     this._entitiesList = value;
     this.entitiesListChange.emit(this._entitiesList);
   }
 
+  /**
+   *  Evento que se lanza cuando cambio el valor de la propiedad entitiesList
+   * @type {EventEmitter<any>}
+   */
   @Output() entitiesListChange = new EventEmitter<any>();
 
 
