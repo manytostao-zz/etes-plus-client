@@ -93,10 +93,36 @@ export class CrudComponent implements OnInit {
   @Input() toolbarItems: any[] = [];
 
   /**
-   * Define la colección de entidades que listará el componente {@link SelectableGridComponent}
+   *  Contiene el listado de las entidades que se van a mostrar en el grid.
    * @type {LinkedList<BaseEntity>}
+   * @private
    */
-  @Input() entitiesList = new Collections.LinkedList<BaseEntity>();
+  private _entitiesList = new Collections.LinkedList<BaseEntity>();
+
+  /**
+   *
+   * @ignore
+   */
+  @Input() get entitiesList() {
+
+    return this._entitiesList;
+  }
+
+  /**
+   *
+   * @ignore
+   */
+  set entitiesList(value: any) {
+    this._entitiesList = value;
+    this.entitiesListChange.emit(this._entitiesList);
+  }
+
+  /**
+   *  Evento que se lanza cuando cambio el valor de la propiedad entitiesList
+   * @type {EventEmitter<any>}
+   */
+  @Output() entitiesListChange = new EventEmitter<any>();
+
 
   /**
    * Evento lanzado cuando se interactúa con los elementos del {@link ToolbarComponent}
@@ -109,6 +135,11 @@ export class CrudComponent implements OnInit {
    */
   selectedEntities: BaseEntity[];
 
+  /**
+   *
+   * @type {boolean}
+   */
+  @Input() localData = false;
   /**
    * Contiene la entidad suministrada al componente {@link AddEditComponent}
    */
@@ -131,9 +162,6 @@ export class CrudComponent implements OnInit {
    * Inicializa el componente
    */
   ngOnInit() {
-
-    this.crudService.entityType = this.entityType;
-
     this.crudService.onEntitySelected.subscribe(
       (selectedEntities: BaseEntity[]) => {
         this.selectedEntities = selectedEntities;
@@ -144,8 +172,13 @@ export class CrudComponent implements OnInit {
         }
       }
     );
+    if (!this.localData) {
+      this.crudService.entityType = this.entityType;
 
-    this.entitiesList = this.crudService.getEntitiesList();
+
+      this.entitiesList = this.crudService.getEntitiesList();
+    }
+
 
     if (this.entityType === '' && this.entitiesList.size() > 0) {
       this.entityType = this.entitiesList.first().constructor.name;
@@ -167,6 +200,14 @@ export class CrudComponent implements OnInit {
         this.addEditEntity = this.selectedEntities[0];
         this.popupVisible = true;
         this.onToolbarItemClicked.emit({type: $event, selectedEntities: this.selectedEntities});
+        if (this.localData) {
+          console.log(this.addEditEntity);
+        }
+        break;
+      case 'remove':
+        if (this.localData) {
+
+        }
         break;
       default:
         this.onToolbarItemClicked.emit({type: $event, selectedEntities: this.selectedEntities});

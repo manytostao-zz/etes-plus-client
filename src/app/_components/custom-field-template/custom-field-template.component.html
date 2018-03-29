@@ -22,7 +22,9 @@
       <app-crud
         *ngSwitchCase="'detail'"
         toolbarCssClass="navbar navbar-expand-lg navbar-light bg-light"
-        [entityType]="fields.getValue(field).entityType">
+        [entityType]="fields.getValue(field).entityType"
+        [(entitiesList)]="entity[field]"
+        [localData]="true">
       </app-crud>
 
     </div>
