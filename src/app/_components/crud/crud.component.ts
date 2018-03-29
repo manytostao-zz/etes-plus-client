@@ -200,6 +200,14 @@ export class CrudComponent implements OnInit {
         this.addEditEntity = this.selectedEntities[0];
         this.popupVisible = true;
         this.onToolbarItemClicked.emit({type: $event, selectedEntities: this.selectedEntities});
+        if (this.localData) {
+          console.log(this.addEditEntity);
+        }
+        break;
+      case 'remove':
+        if (this.localData) {
+
+        }
         break;
       default:
         this.onToolbarItemClicked.emit({type: $event, selectedEntities: this.selectedEntities});
