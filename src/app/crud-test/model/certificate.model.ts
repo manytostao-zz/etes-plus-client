@@ -4,7 +4,8 @@ import {BaseEntity} from '../../_model';
 export class Certificate extends BaseEntity {
 
   @Reflect.metadata('listable', {
-    value: true
+    value: true,
+    editable: true
   })
   @Reflect.metadata('widget', {
     location: {
