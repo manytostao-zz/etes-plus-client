@@ -8,6 +8,7 @@
   [showAddButton]="showToolbarAddButton"
   [showEditButton]="showToolbarEditButton"
   [showRemoveButton]="showToolbarRemoveButton"
+  [showHideDetailButton]="showToolbarHideDetailButton"
   [selectedEntities]="selectedEntities"
   (onToolbarItemClickedEvent)="handleToolbarItemClickedEvent($event)">
 </app-toolbar>
@@ -17,13 +18,14 @@
 <app-selectable-grid
   [keyField]="keyField"
   [entitiesList]="entitiesList"
+  [editable]="editableGrid"
   [multipleSelection]="multipleSelection">
 </app-selectable-grid>
 
 <br>
 
 <app-add-edit
-  *ngIf="addEditEntity !== undefined"
+  *ngIf="addEditEntity !== undefined && showAddEdit"
   [entity]="addEditEntity"
   [editable]="false">
 </app-add-edit>
