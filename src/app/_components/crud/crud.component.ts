@@ -3,6 +3,9 @@ import * as Collections from 'typescript-collections';
 
 import {CrudService} from './crud.service';
 import {BaseEntity} from '../../_model';
+import * as ModelsClassesMap from '../../_model/model-map';
+import {endTimeRange} from '@angular/core/src/profile/wtf_impl';
+import {IHierarchicalEntity} from '../../_model/interfaces';
 
 /**
  * Componente que genera elementos visuales para listar, crear, actualizar y eliminar entidades
@@ -169,6 +172,11 @@ export class CrudComponent implements OnInit {
    * @type {boolean}
    */
   popupVisible = false;
+  /**
+   * Verifica si la entidad es gerarquica y controla si se muestra el árbol o la tabla de la entidad.
+   * @type {boolean}
+   */
+  @Input() isTree = false;
 
   /**
    * Constructor del componente
@@ -202,6 +210,11 @@ export class CrudComponent implements OnInit {
     if (this.entityType === '' && this.entitiesList.size() > 0) {
       this.entityType = this.entitiesList.first().constructor.name;
     }
+
+    const entityInstance = new ModelsClassesMap[this.entityType];
+    if (entityInstance.hasOwnProperty('parentId')) {
+          this.isTree = true;
+        }
   }
 
   /**
