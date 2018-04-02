@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 /**
  * Componente que genera una barra botonera o de herramientas dinámicamente
@@ -73,6 +73,12 @@ export class ToolbarComponent {
    * @type {boolean}
    */
   @Input() showRemoveButton = false;
+
+  /**
+   * Define si será mostrado el botón *Esconder Detalle* en el componente
+   * @type {boolean}
+   */
+  @Input() showHideDetailButton = true;
 
   /**
    * Define los elementos (botones, submenús, etc.) que se mostrarán en el componente

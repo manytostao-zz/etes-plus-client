@@ -8,6 +8,7 @@
   [wordWrapEnabled]="true"
   [allowColumnReordering]="true"
   [allowColumnResizing]="true"
+  [twoWayBindingEnabled]="editable"
   (onSelectionChanged)="handleSelectionChangedEvent($event)"
   (onContentReady)="handleContentReadyEvent($event)">
 
@@ -20,6 +21,11 @@
     mode="infinite"
     showScrollbar="always">
   </dxo-scrolling>
+
+  <dxo-editing *ngIf="editable"
+    mode="cell"
+    [allowUpdating]="true">
+  </dxo-editing>
 
   <dxo-selection
     [mode]="multipleSelection ? 'multiple': 'single'"
@@ -36,6 +42,7 @@
     *ngFor="let column of columns"
     [dataField]="column.name"
     [dataType]="column.type"
+    [allowEditing]="column.editable === true"
     [width]="getColumnWidth(column.type)"
     [visible]="column.visible">
   </dxi-column>

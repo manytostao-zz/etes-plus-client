@@ -81,6 +81,12 @@ export class CrudComponent implements OnInit {
   @Input() showToolbarRemoveButton = true;
 
   /**
+   * Define si será mostrado el botón *Esconder Detalle* en el componente {@link ToolbarComponent}
+   * @type {boolean}
+   */
+  @Input() showToolbarHideDetailButton = true;
+
+  /**
    * Define las clases CSS a utilizar por el componente {@link ToolbarComponent}
    * @type {string}
    */
@@ -93,11 +99,29 @@ export class CrudComponent implements OnInit {
   @Input() toolbarItems: any[] = [];
 
   /**
+   * Define el comportamiento del componente {@link CrudComponent}
+   * @type {boolean}
+   */
+  @Input() localData = false;
+
+  /**
+   * Define si el componente {@link SelectableGridComponent} será editable
+   * @type {boolean}
+   */
+  @Input() editableGrid: false;
+
+  /**
    *  Contiene el listado de las entidades que se van a mostrar en el grid.
    * @type {LinkedList<BaseEntity>}
    * @private
    */
   private _entitiesList = new Collections.LinkedList<BaseEntity>();
+
+  /**
+   * Define si se mostrará el componente {@link AddEditComponent}
+   * @type {any[]}
+   */
+  @Input() showAddEdit = true;
 
   /**
    *
@@ -136,11 +160,6 @@ export class CrudComponent implements OnInit {
   selectedEntities: BaseEntity[];
 
   /**
-   *
-   * @type {boolean}
-   */
-  @Input() localData = false;
-  /**
    * Contiene la entidad suministrada al componente {@link AddEditComponent}
    */
   addEditEntity: any;
@@ -176,7 +195,7 @@ export class CrudComponent implements OnInit {
       this.crudService.entityType = this.entityType;
 
 
-      this.entitiesList = this.crudService.getEntitiesList();
+      // this.entitiesList = this.crudService.getEntitiesList();
     }
 
 
@@ -208,6 +227,11 @@ export class CrudComponent implements OnInit {
         if (this.localData) {
 
         }
+        this.onToolbarItemClicked.emit({type: $event, selectedEntities: this.selectedEntities});
+        break;
+      case 'hide-detail':
+        this.showAddEdit = !this.showAddEdit;
+        this.onToolbarItemClicked.emit({type: $event, selectedEntities: this.selectedEntities});
         break;
       default:
         this.onToolbarItemClicked.emit({type: $event, selectedEntities: this.selectedEntities});
