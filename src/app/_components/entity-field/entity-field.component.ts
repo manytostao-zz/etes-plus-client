@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import * as ModelsClassesMap from '../../_model/model-map';
 
 @Component({
@@ -12,13 +12,15 @@ export class EntityFieldComponent implements OnInit {
    *  Define el nombre de la entidad.
    * @type {string}
    */
-  @Input() entityName = 'Certificate';
+  @Input() entityName = 'Employee';
 
   /**
    * Define el datasource que recibe el lookup
    */
-  dataSourceTreeEntityField: any;
+  dataSourceTreeEntityField: any[];
 
+  @ViewChild('entityFieldTextBox') entityFieldTextBox;
+  @ViewChild('buscar') buscar;
 
   constructor() {
   }
@@ -36,9 +38,68 @@ export class EntityFieldComponent implements OnInit {
   getTextBoxDisplayValue() {
     let widgetInstance;
     widgetInstance = new ModelsClassesMap[this.entityName]();
-    this.dataSourceTreeEntityField = Object.getOwnPropertyNames(widgetInstance);
+    const entity: any = widgetInstance;
+    let i = 0;
+
+    this.dataSourceTreeEntityField = [{
+      key: i,
+      properties: '',
+      parent: ''
+    }];
+    this.dataSourceTreeEntityField.pop();
+    for (const field in entity) {
+
+      if (!Reflect.hasMetadata('key', entity, field)) {
+        if (entity.hasOwnProperty(field)) {
+          let widgetMetadata: any;
+          i++;
+          this.dataSourceTreeEntityField.push({
+            key: i.toString(),
+            properties: field
+          });
+          if (Reflect.hasMetadata('widget', entity, field)) {
+            widgetMetadata = Reflect.getMetadata('widget', entity, field);
+            if (widgetMetadata.name !== undefined && widgetMetadata.name === 'entity-search') {
+              let widgetChildInstance;
+              let j = 1;
+              widgetChildInstance = new ModelsClassesMap[widgetMetadata.options.entityType]();
+              const entityChild: any = widgetChildInstance;
+
+              for (const fieldChild in entityChild) {
+                if (!Reflect.hasMetadata('key', entityChild, fieldChild)) {
+                  if (entityChild.hasOwnProperty(fieldChild)) {
+                    this.dataSourceTreeEntityField.push({
+                      key: i + '_' + j,
+                      properties: fieldChild,
+                      parent: i.toString()
+                    });
+                    j++
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    this.dataSourceTreeEntityField = this.dataSourceTreeEntityField;
+
 
   }
 
+  selectItem(e) {
+    if (e.node.parent === null) {
+      this.entityFieldTextBox.value = this.entityName + '.' + e.node.itemData.properties;
+    } else {
+      if (e.node.parent && e.node.parent.parent === null) {
+        this.entityFieldTextBox.value = this.entityName + '.' + e.node.parent.itemData.properties + '.' + e.node.itemData.properties;
+      } else {
+        if (e.node.parent && e.node.parent.parent && e.node.parent.parent.parent === null) {
+          this.entityFieldTextBox.value = this.entityName + '.' + e.node.parent.parent.itemData.properties + '.' + e.node.parent.itemData.properties + '.' + e.node.itemData.properties;
+        }
+      }
+    }
+
+  }
 
 }

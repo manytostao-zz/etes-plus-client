@@ -1,7 +1,23 @@
-<dx-lookup
-  [dataSource]="dataSourceTreeEntityField"
-  placeholder="Selecciona"
-  searchPlaceholder="Buscar"
-  cancelButtonText="Cancelar"
->
-</dx-lookup>
+<div>
+  <dx-text-box class="" style="width: 50%" [showClearButton]="true" #entityFieldTextBox ></dx-text-box>
+  <br>
+  <dx-tree-view
+    [dataSource]="dataSourceTreeEntityField"
+    dataStructure="plain"
+    keyExpr="key"
+    displayExpr="properties"
+    parentIdExpr="parent"
+    [searchEnabled]="true"
+    [width]="'50%'"
+    [selectNodesRecursive]="true"
+
+    (onItemClick)="selectItem($event)"
+
+  >
+    <dxo-search-editor-options
+      placeholder="Filtrar"
+      >
+    </dxo-search-editor-options>
+  </dx-tree-view>
+</div>
+
