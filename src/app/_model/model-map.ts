@@ -3,3 +3,4 @@
  */
 export { Employee} from '../crud-test/model/employee.model';
 export { Certificate }from '../crud-test/model/certificate.model';
+export { DeudorAcreedor }from '../crud-test/model/deudorAcreedor.model';

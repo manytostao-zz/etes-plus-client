@@ -16,11 +16,21 @@
 <br>
 
 <app-selectable-grid
+  *ngIf="!isTree"
   [keyField]="keyField"
   [entitiesList]="entitiesList"
   [editable]="editableGrid"
   [multipleSelection]="multipleSelection">
 </app-selectable-grid>
+
+<br>
+
+<app-tree-list
+  *ngIf="isTree"
+  [keyField]="keyField"
+  [entitiesListTree]="entitiesList"
+  [multipleSelection]="multipleSelection">
+</app-tree-list>
 
 <br>
 

@@ -1,0 +1,40 @@
+<dx-tree-list
+
+  id="TreeContainer"
+  width="100%"
+  [dataSource]="listableTreeArray"
+  [keyExpr]="keyField"
+  parentIdExpr="parentId"
+  [showBorders]="true"
+  [columnAutoWidth]="true"
+  [wordWrapEnabled]="true"
+  (onSelectionChanged)="handleSelectionChangedEvent($event)"
+  (onContentReady)="handleContentReadyEvent($event)">
+  <dxo-search-panel
+    [visible]="true"
+    width="300">
+  </dxo-search-panel>
+
+  <dxo-header-filter
+    [visible]="true">
+  </dxo-header-filter>
+
+  <dxo-selection
+    [mode]="multipleSelection ? 'multiple': 'single'"
+    selectAllMode="page"
+    showCheckBoxesMode="none">
+  </dxo-selection>
+
+  <dxo-column-chooser
+    [enabled]="true"
+    [allowSearch]="true">
+  </dxo-column-chooser>
+
+  <dxi-column
+    *ngFor="let column of columns"
+    [dataField]="column.name"
+    [dataType]="column.type"
+    [width]="getColumnWidth(column.type)"
+    [visible]="column.visible">
+  </dxi-column>
+</dx-tree-list>
