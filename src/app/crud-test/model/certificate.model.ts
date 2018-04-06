@@ -2,12 +2,26 @@ import 'reflect-metadata';
 import {BaseEntity} from '../../_model';
 
 export class Certificate extends BaseEntity {
-  @Reflect.metadata('listable', true)
-  @Reflect.metadata('category', 'general')
+
+  @Reflect.metadata('listable', {
+    value: true,
+    editable: true
+  })
+  @Reflect.metadata('widget', {
+    location: {
+      category: 'general'
+    }
+  })
   title: string;
 
-  @Reflect.metadata('listable', true)
-  @Reflect.metadata('category', 'general')
+  @Reflect.metadata('listable', {
+    value: true
+  })
+  @Reflect.metadata('widget', {
+    location: {
+      category: 'general'
+    }
+  })
   expeditionDate: Date;
 
   constructor(id: string, title: string, expeditionDate: Date) {

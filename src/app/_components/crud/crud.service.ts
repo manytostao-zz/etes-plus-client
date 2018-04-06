@@ -33,6 +33,24 @@ export class CrudService {
       )
     );
 
+    const localCertificates = new Collections.LinkedList<Certificate>();
+
+    localCertificates.add(
+      new Certificate(
+        '1',
+        'Software Engineer',
+        new Date()
+      )
+    );
+
+    localCertificates.add(
+      new Certificate(
+        '2',
+        'Librarian',
+        new Date()
+      )
+    );
+
     this.employeesList.add(
       new Employee(
         '1',
@@ -48,7 +66,7 @@ export class CrudService {
         'Playa',
         'La Habana',
         <Certificate>this.certificatesList.first(),
-        null
+        localCertificates
       )
     );
 

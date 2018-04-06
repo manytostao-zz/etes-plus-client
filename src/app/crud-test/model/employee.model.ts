@@ -6,74 +6,133 @@ import {Certificate} from './certificate.model';
 
 export class Employee extends BaseEntity {
 
-  @Reflect.metadata('listable', true)
-  @Reflect.metadata('category', 'general')
+  @Reflect.metadata('listable', {
+    value: true
+  })
+  @Reflect.metadata('widget', {
+    location: {
+      category: 'general'
+    }
+  })
   firstName: string;
 
-  @Reflect.metadata('listable', true)
-  @Reflect.metadata('category', 'general')
+  @Reflect.metadata('listable', {
+    value: true
+  })
+  @Reflect.metadata('widget', {
+    location: {
+      category: 'general'
+    }
+  })
   lastName: string;
 
-  @Reflect.metadata('listable', true)
-  @Reflect.metadata('category', 'general')
+  @Reflect.metadata('listable', {
+    value: true
+  })
+  @Reflect.metadata('widget', {
+    location: {
+      category: 'general'
+    }
+  })
   prefix: string;
 
-  @Reflect.metadata('listable', true)
-  @Reflect.metadata('visible', false)
-  @Reflect.metadata('category', 'general')
+  @Reflect.metadata('listable', {
+    value: true,
+    visible: false
+  })
+  @Reflect.metadata('widget', {
+    location: {
+      category: 'general'
+    }
+  })
   position: string;
 
-  @Reflect.metadata('category', 'general')
+  @Reflect.metadata('widget', {
+    location: {
+      category: 'general'
+    }
+  })
   picture: string;
 
-  @Reflect.metadata('listable', true)
-  @Reflect.metadata('category', 'others')
-  @Reflect.metadata('group', 'dates')
+  @Reflect.metadata('listable', {
+    value: true
+  })
+  @Reflect.metadata('widget', {
+    location: {
+      category: 'others',
+      group: 'dates'
+    }
+  })
   birthDate: Date;
 
-  @Reflect.metadata('listable', true)
-  @Reflect.metadata('category', 'others')
-  @Reflect.metadata('group', 'dates')
+  @Reflect.metadata('listable', {
+    value: true
+  })
+  @Reflect.metadata('widget', {
+    location: {
+      category: 'others',
+      group: 'dates'
+    }
+  })
   hireDate: Date;
 
-  @Reflect.metadata('listable', true)
-  @Reflect.metadata('category', 'others')
-  @Reflect.metadata('group', 'textarea')
-  @Reflect.metadata('widget',
-    {
-      name: 'textarea'
-    })
+  @Reflect.metadata('listable', {
+    value: true
+  })
+  @Reflect.metadata('widget', {
+    name: 'textarea',
+    location: {
+      category: 'others',
+      group: 'textarea'
+    }
+  })
   notes: string;
 
-  @Reflect.metadata('listable', true)
-  @Reflect.metadata('category', 'others')
-  @Reflect.metadata('group', 'textarea')
+  @Reflect.metadata('listable', {
+    value: true
+  })
   @Reflect.metadata('widget', {
-    name: 'textarea'
+    name: 'textarea',
+    location: {
+      category: 'others',
+      group: 'textarea'
+    }
   })
   address: string;
 
-  @Reflect.metadata('category', 'others')
+  @Reflect.metadata('widget', {
+    location: {
+      category: 'others'
+    }
+  })
   state: string;
 
-  @Reflect.metadata('category', 'others')
+  @Reflect.metadata('widget', {
+    location: {
+      category: 'others'
+    }
+  })
   city: string;
 
-  @Reflect.metadata('category', 'general')
   @Reflect.metadata('widget', {
     name: 'entity-search',
     options: {
       entityType: 'Certificate',
       properties: ['title']
+    },
+    location: {
+      category: 'general'
     }
   })
   certificate: Certificate;
 
-  @Reflect.metadata('category', 'certificates')
   @Reflect.metadata('widget', {
     name: 'detail',
     options: {
       entityType: 'Certificate'
+    },
+    location: {
+      category: 'certificates'
     }
   })
   certificates: Collections.LinkedList<Certificate>;
@@ -106,6 +165,6 @@ export class Employee extends BaseEntity {
     this.state = state;
     this.city = city;
     this.certificate = certificate;
-    this.certificates = this.certificates;
+    this.certificates = certificates;
   }
 }

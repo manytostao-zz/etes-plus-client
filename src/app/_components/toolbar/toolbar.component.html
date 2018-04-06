@@ -47,6 +47,14 @@
               locateInMenu="auto">
     </dxi-item>
 
+    <dxi-item widget="dxButton"
+              [options]="{icon: 'info'}"
+              [visible]="showHideDetailButton && inCrud"
+              type="hide-detail"
+              location="after"
+              locateInMenu="auto">
+    </dxi-item>
+
   </ng-template>
 
   <dxi-item *ngFor="let item of items"
