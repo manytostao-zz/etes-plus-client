@@ -45,7 +45,6 @@
     "simple-line-icons": "^2.4.1",
     "ts-helpers": "1.1.2",
     "typescript-collections": "^1.3.2",
-    "wide-align": "^1.1.2",
     "zone.js": "0.8.20"
   },
   "devDependencies": {
