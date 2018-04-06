@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import * as ModelsClassesMap from '../../_model/model-map';
 
 @Component({
@@ -19,8 +19,17 @@ export class EntityFieldComponent implements OnInit {
    */
   dataSourceTreeEntityField: any[];
 
-  @ViewChild('entityFieldTextBox') entityFieldTextBox;
-  @ViewChild('buscar') buscar;
+  /**
+   * Valor que se muestra en el input del componente
+   */
+  _treeValue: any;
+
+  /**
+   *  Define el estado de la visibilidad del treeview
+   * @type {boolean}
+   */
+  status = false;
+
 
   constructor() {
   }
@@ -28,6 +37,7 @@ export class EntityFieldComponent implements OnInit {
   ngOnInit() {
 
     this.getTextBoxDisplayValue();
+
 
   }
 
@@ -87,19 +97,36 @@ export class EntityFieldComponent implements OnInit {
 
   }
 
+  /**
+   * Evento lanzado al dar click sobre un item del treeview
+   * @param e
+   */
   selectItem(e) {
     if (e.node.parent === null) {
-      this.entityFieldTextBox.value = this.entityName + '.' + e.node.itemData.properties;
+      this._treeValue = this.entityName + '.' + e.node.itemData.properties;
     } else {
       if (e.node.parent && e.node.parent.parent === null) {
-        this.entityFieldTextBox.value = this.entityName + '.' + e.node.parent.itemData.properties + '.' + e.node.itemData.properties;
+        this._treeValue = this.entityName + '.' + e.node.parent.itemData.properties + '.' + e.node.itemData.properties;
       } else {
         if (e.node.parent && e.node.parent.parent && e.node.parent.parent.parent === null) {
-          this.entityFieldTextBox.value = this.entityName + '.' + e.node.parent.parent.itemData.properties + '.' + e.node.parent.itemData.properties + '.' + e.node.itemData.properties;
+          this._treeValue = this.entityName + '.' + e.node.parent.parent.itemData.properties + '.' + e.node.parent.itemData.properties + '.' + e.node.itemData.properties;
         }
       }
     }
-
+    this.status = false;
   }
 
+  /**
+   * Define la visibilidad del treeview, cambia su estado a true
+   */
+  changeStatus() {
+    this.status = true;
+  }
+
+  /**
+   * Define la visibilidad del treeview, cambia su estado a false
+   */
+  changeStatusOut() {
+    this.status = false;
+  }
 }

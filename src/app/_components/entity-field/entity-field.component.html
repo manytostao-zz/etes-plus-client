@@ -1,22 +1,20 @@
 <div>
-  <dx-text-box class="" style="width: 50%" [showClearButton]="true" #entityFieldTextBox ></dx-text-box>
+  <dx-text-box class="" style="width: 50%" [showClearButton]="true" (onFocusIn)="changeStatus()"
+               (onKeyPress)="changeStatus()" [value]="_treeValue"></dx-text-box>
   <br>
-  <dx-tree-view
-    [dataSource]="dataSourceTreeEntityField"
-    dataStructure="plain"
-    keyExpr="key"
-    displayExpr="properties"
-    parentIdExpr="parent"
-    [searchEnabled]="true"
-    [width]="'50%'"
-    [selectNodesRecursive]="true"
-
-    (onItemClick)="selectItem($event)"
-
-  >
+  <dx-tree-view *ngIf="status"
+                [dataSource]="dataSourceTreeEntityField"
+                dataStructure="plain"
+                keyExpr="key"
+                displayExpr="properties"
+                parentIdExpr="parent"
+                [searchEnabled]="true"
+                [width]="'50%'"
+                [selectNodesRecursive]="true"
+                (onItemClick)="selectItem($event)">
     <dxo-search-editor-options
       placeholder="Filtrar"
-      >
+    >
     </dxo-search-editor-options>
   </dx-tree-view>
 </div>
