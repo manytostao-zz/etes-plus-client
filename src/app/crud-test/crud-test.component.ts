@@ -11,8 +11,8 @@ import {BaseEntity} from '../_model';
 })
 export class CrudTestComponent implements OnInit {
   toolbarItems: any[] = [];
-  entityType = 'Employee';
-
+   entityType = 'Employee';
+  // entityType = 'DeudorAcreedor';
   constructor() {
   }
 

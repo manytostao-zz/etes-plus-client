@@ -26,6 +26,7 @@ import {CrudTestComponent} from './crud-test/crud-test.component';
 import {EntitySearchComponent} from './_components/entity-search/entity-search.component';
 import {EntityFieldComponent} from './_components/entity-field/entity-field.component';
 import { CustomFieldTemplateComponent } from './_components/custom-field-template/custom-field-template.component';
+import { TreeListComponent } from './_components/tree-list/tree-list.component';
 import {
   AppAsideComponent,
   AppBreadcrumbsComponent,
@@ -62,7 +63,8 @@ const APP_COMPONENTS = [
   CrudTestComponent,
   EntitySearchComponent,
   EntityFieldComponent,
-  CustomFieldTemplateComponent
+  CustomFieldTemplateComponent,
+  TreeListComponent
 ];
 
 // Import directives
@@ -91,6 +93,7 @@ import {DevExtremeModule} from 'devextreme-angular';
 import {ButtonsModule} from 'ngx-bootstrap';
 
 
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -106,7 +109,7 @@ import {ButtonsModule} from 'ngx-bootstrap';
     AppComponent,
     ...APP_CONTAINERS,
     ...APP_COMPONENTS,
-    ...APP_DIRECTIVES
+    ...APP_DIRECTIVES,
   ],
   providers: [{
     provide: LocationStrategy,
