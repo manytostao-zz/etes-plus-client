@@ -1,5 +1,9 @@
+/*
+ * Copyright (c) 2018. DATYS Soluciones Tecnológicas
+ */
+
 import 'reflect-metadata';
-import {BaseEntity} from '../../_model';
+import {BaseEntity} from '../../../_model';
 
 export class Certificate extends BaseEntity {
 

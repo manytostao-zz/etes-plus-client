@@ -4,8 +4,6 @@ import * as Collections from 'typescript-collections';
 import {CrudService} from './crud.service';
 import {BaseEntity} from '../../_model';
 import * as ModelsClassesMap from '../../_model/model-map';
-import {endTimeRange} from '@angular/core/src/profile/wtf_impl';
-import {IHierarchicalEntity} from '../../_model/interfaces';
 
 /**
  * Componente que genera elementos visuales para listar, crear, actualizar y eliminar entidades
@@ -24,8 +22,7 @@ import {IHierarchicalEntity} from '../../_model/interfaces';
 @Component({
   selector: 'app-crud',
   templateUrl: './crud.component.html',
-  styleUrls: ['./crud.component.scss'],
-  providers: [CrudService]
+  styleUrls: ['./crud.component.scss']
 })
 export class CrudComponent implements OnInit {
 
@@ -114,17 +111,23 @@ export class CrudComponent implements OnInit {
   @Input() editableGrid: false;
 
   /**
+   * Define si se mostrará el componente {@link AddEditComponent}
+   * @type {any[]}
+   */
+  @Input() showAddEdit = true;
+
+  /**
+   * Verifica si la entidad es jerárquica y controla si se muestra el árbol o la tabla de la entidad.
+   * @type {boolean}
+   */
+  @Input() isTree = false;
+
+  /**
    *  Contiene el listado de las entidades que se van a mostrar en el grid.
    * @type {LinkedList<BaseEntity>}
    * @private
    */
   private _entitiesList = new Collections.LinkedList<BaseEntity>();
-
-  /**
-   * Define si se mostrará el componente {@link AddEditComponent}
-   * @type {any[]}
-   */
-  @Input() showAddEdit = true;
 
   /**
    *
@@ -150,7 +153,6 @@ export class CrudComponent implements OnInit {
    */
   @Output() entitiesListChange = new EventEmitter<any>();
 
-
   /**
    * Evento lanzado cuando se interactúa con los elementos del {@link ToolbarComponent}
    * @type {EventEmitter<{type: string; selectedEntities: BaseEntity[]}>}
@@ -172,23 +174,15 @@ export class CrudComponent implements OnInit {
    * @type {boolean}
    */
   popupVisible = false;
-  /**
-   * Verifica si la entidad es gerarquica y controla si se muestra el árbol o la tabla de la entidad.
-   * @type {boolean}
-   */
-  @Input() isTree = false;
 
-  /**
-   * Constructor del componente
-   * @param {CrudService} crudService
-   */
-  constructor(private crudService: CrudService) {
+  constructor(private crudService: CrudService<BaseEntity>) {
   }
 
   /**
    * Inicializa el componente
    */
   ngOnInit() {
+
     this.crudService.onEntitySelected.subscribe(
       (selectedEntities: BaseEntity[]) => {
         this.selectedEntities = selectedEntities;
@@ -199,12 +193,10 @@ export class CrudComponent implements OnInit {
         }
       }
     );
-    if (!this.localData) {
-      this.crudService.entityType = this.entityType;
 
-
-      // this.entitiesList = this.crudService.getEntitiesList();
-    }
+    // if (!this.localData) {
+    //   this.crudService.entityType = this.entityType;
+    // }
 
 
     if (this.entityType === '' && this.entitiesList.size() > 0) {
@@ -213,8 +205,10 @@ export class CrudComponent implements OnInit {
 
     const entityInstance = new ModelsClassesMap[this.entityType];
     if (entityInstance.hasOwnProperty('parentId')) {
-          this.isTree = true;
-        }
+      this.isTree = true;
+    }
+    // console.log(this.crudService.getType());
+
   }
 
   /**

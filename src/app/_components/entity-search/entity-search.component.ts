@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 
 import {BaseEntity} from '../../_model';
-import {Certificate} from '../../crud-test/model/certificate.model';
+import {Certificate} from '../../nomenclatives/employee/model/certificate.model';
 
 /**
  * Componente que permite acceder al crud de la entitdad, o crear una nueva entidad
@@ -38,6 +38,24 @@ export class EntitySearchComponent {
    * @type {[string,string]}
    */
   @Input() properties: any[] = ['code', 'description'];
+
+  /**
+   * Define si será mostrado el botón *Agregar* en el componente
+   * @type {boolean}
+   */
+  @Input() showAddButton = true;
+
+  /**
+   * Define si será mostrado el botón *Buscar* en el componente
+   * @type {boolean}
+   */
+  @Input() showSearchButton = true;
+
+  /**
+   * Define si será mostrado el botón *Eliminar* en el componente
+   * @type {boolean}
+   */
+  @Input() showRemoveButton = true;
 
   /**
    *  Referencia al elemento input de la vista
@@ -87,23 +105,6 @@ export class EntitySearchComponent {
     this.selectedEntityChange.emit(this._selectedEntity);
   }
 
-  /**
-   * Define si será mostrado el botón *Agregar* en el componente
-   * @type {boolean}
-   */
-  @Input() showAddButton = true;
-
-  /**
-   * Define si será mostrado el botón *Buscar* en el componente
-   * @type {boolean}
-   */
-  @Input() showSearchButton = true;
-
-  /**
-   * Define si será mostrado el botón *Eliminar* en el componente
-   * @type {boolean}
-   */
-  @Input() showRemoveButton = true;
   /**
    *  Maneja la suscripción al evento (onToolbarItemClicked) del componente (@link CrudComponent)
    * @param $event
