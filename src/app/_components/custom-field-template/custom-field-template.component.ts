@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 
 import {BaseEntity} from '../../_model';
 import * as Collections from 'typescript-collections';
+import {CrudService} from '../crud/crud.service';
 
 /**
  * Componente que genera dinámicamente un control visual de formulario para la edición del valor de la propiedad de una entidad

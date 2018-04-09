@@ -17,16 +17,8 @@ const APP_CONTAINERS = [
 ];
 
 // Import components
-import {DashboardComponent} from './_components/dashboard/dashboard.component';
-import {CrudComponent} from './_components/crud/crud.component';
-import {ToolbarComponent} from './_components/toolbar/toolbar.component';
-import {SelectableGridComponent} from './_components/selectable-grid/selectable-grid.component';
-import {AddEditComponent} from './_components/add-edit/add-edit.component';
-import {CrudTestComponent} from './crud-test/crud-test.component';
-import {EntitySearchComponent} from './_components/entity-search/entity-search.component';
-import {EntityFieldComponent} from './_components/entity-field/entity-field.component';
-import { CustomFieldTemplateComponent } from './_components/custom-field-template/custom-field-template.component';
-import { TreeListComponent } from './_components/tree-list/tree-list.component';
+import {DashboardComponent} from './_components';
+
 import {
   AppAsideComponent,
   AppBreadcrumbsComponent,
@@ -55,16 +47,7 @@ const APP_LAYOUT_COMPONENTS = [
 
 const APP_COMPONENTS = [
   APP_LAYOUT_COMPONENTS,
-  DashboardComponent,
-  CrudComponent,
-  ToolbarComponent,
-  SelectableGridComponent,
-  AddEditComponent,
-  CrudTestComponent,
-  EntitySearchComponent,
-  EntityFieldComponent,
-  CustomFieldTemplateComponent,
-  TreeListComponent
+  DashboardComponent
 ];
 
 // Import directives
@@ -89,9 +72,10 @@ import {AppRoutingModule} from './app.routing';
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import {TabsModule} from 'ngx-bootstrap/tabs';
 import {ChartsModule} from 'ng2-charts/ng2-charts';
-import {DevExtremeModule} from 'devextreme-angular';
 import {ButtonsModule} from 'ngx-bootstrap';
 
+// Import shared module
+import {SharedModule} from './shared/shared.module';
 
 
 @NgModule({
@@ -103,7 +87,7 @@ import {ButtonsModule} from 'ngx-bootstrap';
     TabsModule.forRoot(),
     ButtonsModule.forRoot(),
     ChartsModule,
-    DevExtremeModule
+    SharedModule
   ],
   declarations: [
     AppComponent,

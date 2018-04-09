@@ -55,14 +55,20 @@ export class TreeListComponent implements OnChanges {
    * Constructor del componente
    * @param {CrudService} crudService
    */
-  constructor(private crudService: CrudService) { }
+  constructor(private crudService: CrudService<BaseEntity>) { }
 
   /**
    * Construye el listado por cada cambio detectado en las propiedades del componente
    */
    ngOnChanges() {
 
-    this.entitiesListTree = this.entitiesListTree === undefined ? this.crudService.getEntitiesList() : this.entitiesListTree;
+    // this.entitiesListTree = this.entitiesListTree === undefined ? this.crudService.getAll() : this.entitiesListTree;
+
+    this.crudService.getAll()
+      .subscribe(
+        (response) => console.log(response),
+        (error) => console.log(error)
+      );
 
     this.buildTreeColumns();
 
