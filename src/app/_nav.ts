@@ -5,12 +5,33 @@ export const navigation = [
     icon: 'icon-speedometer',
   },
   {
-    name: 'CRUD Test',
-    url: '/crud-test',
-    icon: 'icon-user',
-    badge: {
-      variant: 'info',
-      text: 'NEW'
-    }
-  }
+    title: true,
+    name: 'Nomenclatives'
+  },
+  {
+    name: 'General',
+    url: '/nomenclatives',
+    icon: 'icon-puzzle',
+    children: [
+      {
+        name: 'Employee',
+        url: '/nomenclatives/employee',
+        icon: 'icon-people'
+      },
+      {
+        name: 'Payment Means',
+        url: '/nomenclatives/payment-means',
+        icon: 'icon-credit-card'
+      }
+    ]
+  },
+  {
+    title: true,
+    name: 'Stock'
+  },
+  {
+    name: 'Reception',
+    url: '/stock/reception',
+    icon: 'icon-layers'
+  },
 ];

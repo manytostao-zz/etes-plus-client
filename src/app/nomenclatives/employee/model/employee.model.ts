@@ -1,7 +1,11 @@
+/*
+ * Copyright (c) 2018. DATYS Soluciones Tecnológicas
+ */
+
 import 'reflect-metadata';
 import * as Collections from 'typescript-collections';
 
-import {BaseEntity} from '../../_model';
+import {BaseEntity} from '../../../_model';
 import {Certificate} from './certificate.model';
 
 export class Employee extends BaseEntity {

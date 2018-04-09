@@ -1,12 +1,16 @@
+/*
+ * Copyright (c) 2018. DATYS Soluciones Tecnológicas
+ */
+
 import 'reflect-metadata';
 import * as Collections from 'typescript-collections';
 
-import {BaseEntity} from '../../_model';
+import {BaseEntity} from '../../../_model';
 import {Certificate} from './certificate.model';
-import {IHierarchicalEntity} from '../../_model/interfaces';
+import {IHierarchicalEntity} from '../../../_model/interfaces';
 
 @Reflect.metadata('treeList', {value: true})
-export class DeudorAcreedor extends BaseEntity implements IHierarchicalEntity {
+export class CreditorDebtor extends BaseEntity implements IHierarchicalEntity {
   parentId: string;
 
   parentCode: string;

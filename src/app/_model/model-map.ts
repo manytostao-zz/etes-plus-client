@@ -1,6 +1,6 @@
 /**
  * Created by reinier.decardenas on 26/03/2018.
  */
-export { Employee} from '../crud-test/model/employee.model';
-export { Certificate }from '../crud-test/model/certificate.model';
-export { DeudorAcreedor }from '../crud-test/model/deudorAcreedor.model';
+export { Employee} from '../nomenclatives/employee/model/employee.model';
+export { Certificate }from '../nomenclatives/employee/model/certificate.model';
+export { CreditorDebtor }from '../nomenclatives/employee/model/creditorDebtor.model';

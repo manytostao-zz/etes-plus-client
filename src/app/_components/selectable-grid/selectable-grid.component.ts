@@ -1,12 +1,10 @@
-import {Component, Inject, Input, OnChanges} from '@angular/core';
-import {Http} from '@angular/http';
-import DataSource from 'devextreme/data/data_source';
-import CustomStore from 'devextreme/data/custom_store';
+import {Component, Input, OnInit} from '@angular/core';
 import * as Collections from 'typescript-collections';
 import 'rxjs/add/operator/toPromise';
 
 import {CrudService} from '../crud/crud.service';
 import {BaseEntity} from '../../_model';
+import CustomStore from 'devextreme/data/custom_store';
 
 /**
  * Componente para listar entidades
@@ -25,7 +23,7 @@ import {BaseEntity} from '../../_model';
   templateUrl: './selectable-grid.component.html',
   styleUrls: ['./selectable-grid.component.scss'],
 })
-export class SelectableGridComponent implements OnChanges {
+export class SelectableGridComponent implements OnInit {
 
   /**
    * Define el campo clave del listado para establecer las reglas de selección de filas
@@ -52,12 +50,6 @@ export class SelectableGridComponent implements OnChanges {
   @Input() editable = false;
 
   /**
-   * Contiene el arreglo de entidades que recibirá el componente dx-data-grid
-   * @type {any[]}
-   */
-  listableArray: any[] = [];
-
-  /**
    * Contiene el arreglo de columnas que serán definidas para el componente dx-data-grid
    * @type {any[]}
    */
@@ -79,49 +71,35 @@ export class SelectableGridComponent implements OnChanges {
    * Constructor del componente
    * @param {CrudService} crudService
    */
-  constructor(private crudService: CrudService) {
-    // const dataSourceConfiguration = {
-    //   load: function (loadOptions: any) {
-    //     console.log(loadOptions);
-    //     return crudService.getEntitiesList().toPromise()
-    //       .then(response => {
-    //         const data = response.toArray();
-    //         const totalCount = response.size();
-    //
-    //         console.log(data, totalCount);
-    //         return {data: data, totalCount: totalCount}
-    //       })
-    //       .catch(error => {
-    //         throw new Error('Data loading error');
-    //       });
-    //     // return http.get('a').toPromise()
-    //     //   .then(response => {
-    //     //     console.log(response)
-    //     //   }).catch(error => {
-    //     //     console.log(error)
-    //     //   });
-    //   },
-    //   onLoaded: function () {
-    //     console.log('Data loaded');
-    //   },
-    //   onLoading: function () {
-    //     console.log('Data loading');
-    //   }
-    // };
-    //
-    // this.dataSource = new CustomStore(dataSourceConfiguration);
+  constructor(private crudService: CrudService<BaseEntity>) {
+
+    const dataSourceConfiguration = {
+      load: function (loadOptions: any) {
+        return crudService.getAll().toPromise()
+          .then((response: Collections.LinkedList<BaseEntity>) => {
+            const data = response.toArray();
+            const totalCount = data.length;
+            return {data: data, totalCount: totalCount}
+          })
+          .catch(error => {
+            throw new Error('Data loading error: ' + error.toString());
+          });
+      },
+      onLoaded: function () {
+        console.log('Data loaded');
+      },
+      onLoading: function () {
+        console.log('Data loading');
+      }
+    };
+
+    this.dataSource = new CustomStore(dataSourceConfiguration);
   }
 
   /**
    * Construye el listado por cada cambio detectado en las propiedades del componente
    */
-  ngOnChanges() {
-
-    this.entitiesList = this.entitiesList === undefined ? this.crudService.getEntitiesList() : this.entitiesList;
-
-    this.buildGridColumns();
-
-    this.listableArray = this.entitiesList.toArray();
+  ngOnInit() {
   }
 
   buildGridColumns() {
