@@ -1,107 +1,18 @@
 import {EventEmitter} from '@angular/core';
 import * as Collections from 'typescript-collections';
+import {Observable} from 'rxjs/Observable';
+import {Http} from '@angular/http';
 
-import {BaseEntity} from '../../_model';
-import {Employee} from '../../crud-test/model/employee.model';
-import {Certificate} from '../../crud-test/model/certificate.model';
+export abstract class CrudService<T> {
 
-export class CrudService {
+  onEntitySelected = new EventEmitter<T[]>();
 
-  private employeesList = new Collections.LinkedList<BaseEntity>();
+  protected apiAddress = '';
 
-  private certificatesList = new Collections.LinkedList<BaseEntity>();
-
-  onEntitySelected = new EventEmitter<BaseEntity[]>();
-
-  constructor() {
-
-    this.employeesList.add(
-      new Employee(
-        '1',
-        'Osmany',
-        'Torres Leyva',
-        'Mr.',
-        'CEO',
-        'adasdasdwqer',
-        new Date(),
-        new Date(),
-        'Notas',
-        '31A #2609',
-        'Playa',
-        'La Habana',
-        null
-      )
-    );
-
-    this.employeesList.add(
-      new Employee(
-        '2',
-        'Ana Liz',
-        'García Meriño',
-        'Ms.',
-        'CGO',
-        'adasdasdwqer',
-        new Date(),
-        new Date(),
-        'Notas',
-        '31A #2609',
-        'Playa',
-        'La Habana',
-        null
-      )
-    );
-
-    this.employeesList.add(
-      new Employee(
-        '3',
-        'Oscar',
-        'Torres Leyva',
-        'Mr.',
-        'CDO',
-        'adasdasdwqer',
-        new Date(),
-        new Date(),
-        'Notas',
-        '31A #2609',
-        'Playa',
-        'La Habana',
-        null
-      )
-    );
-
-    this.certificatesList.add(
-      new Certificate(
-        '1',
-        'Software Engineer',
-        new Date()
-      )
-    );
-
-    this.certificatesList.add(
-      new Certificate(
-        '2',
-        'Librarian',
-        new Date()
-      )
-    );
-
-    this.certificatesList.add(
-      new Certificate(
-        '3',
-        'Nuclear Phycisist',
-        new Date()
-      )
-    );
+  constructor(protected http: Http) {
   }
 
-  getEntitiesList(entityType: string) {
-    switch (entityType) {
-      case 'Employee':
-        return this.employeesList;
-      case 'Certificate':
-        return this.certificatesList;
-    }
-
+  getAll(): Observable<any> {
+    return this.http.get(this.apiAddress + '?api_key=200d3c95129255a48e30cd2bd6b209d0d23507c918fb66e9cf092b9973c3c6cb');
   }
-
 }

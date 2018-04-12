@@ -1,9 +1,8 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 
-import {DashboardComponent} from './_components/dashboard/dashboard.component';
-import {CrudTestComponent} from './crud-test/crud-test.component';
-import {EntitySearchComponent} from './_components/entity-search/entity-search.component'
+import {DashboardComponent} from './_components';
+import {SimpleLayoutComponent} from './_layout/containers/simple-layout';
 
 export const routes: Routes = [
   {
@@ -19,11 +18,15 @@ export const routes: Routes = [
     }
   },
   {
-    path: 'crud-test',
-    component: CrudTestComponent,
-    data: {
-      title: 'CRUD Test'
-    }
+    path: 'nomenclatives',
+    component: SimpleLayoutComponent,
+    // data: {title: 'Nomenclatives'},
+    children: [
+      {
+        path: '',
+        loadChildren: './nomenclatives/nomenclatives.module#NomenclativesModule'
+      }
+    ]
   }
 ];
 

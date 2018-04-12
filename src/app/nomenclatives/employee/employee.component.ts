@@ -1,17 +1,16 @@
 import {Component, OnInit} from '@angular/core';
-import {Employee} from './model/employee.model';
+import {CrudService} from '../../_components/crud/crud.service';
+import {EmployeeCrudService} from './employee-crud.service';
 import notify from 'devextreme/ui/notify';
-import * as Collections from 'typescript-collections';
-import {BaseEntity} from '../_model';
 
 @Component({
-  selector: 'app-crud-test',
-  templateUrl: './crud-test.component.html',
-  styleUrls: ['./crud-test.component.scss']
+  selector: 'app-employee',
+  templateUrl: './employee.component.html',
+  styleUrls: ['./employee.component.scss'],
+  providers: [{provide: CrudService, useClass: EmployeeCrudService}]
 })
-export class CrudTestComponent implements OnInit {
+export class EmployeeComponent implements OnInit {
   toolbarItems: any[] = [];
-  entitiesList = new Collections.LinkedList<BaseEntity>();
   entityType = 'Employee';
 
   constructor() {
@@ -51,5 +50,4 @@ export class CrudTestComponent implements OnInit {
       }
     ];
   }
-
 }

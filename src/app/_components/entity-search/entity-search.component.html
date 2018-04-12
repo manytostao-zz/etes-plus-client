@@ -1,9 +1,9 @@
 <div class="dx-field">
 
   <dx-text-box [disabled]="disabled" class="float-left" style="width: 50%" [value]="getTextBoxDisplayValue()" #entitySearchTextBox></dx-text-box>
-  <dx-button [disabled]="disabled" class="float-left" icon="add" (onClick)="createEntity(entityType)"></dx-button>
-  <dx-button [disabled]="disabled" class="float-left" icon="search" (onClick)="searchEntity(entityType)"></dx-button>
-  <dx-button [disabled]="disabled" class="float-left" icon="trash" (onClick)="removeEntity()"></dx-button>
+  <dx-button [visible]="showAddButton"  class="float-left" icon="add" (onClick)="createEntity(entityType)"></dx-button>
+  <dx-button [visible]="showSearchButton" class="float-left" icon="search" (onClick)="searchEntity(entityType)"></dx-button>
+  <dx-button [visible]="showRemoveButton"  class="float-left" icon="trash" (onClick)="removeEntity()"></dx-button>
 
 </div>
 

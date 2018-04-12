@@ -3,6 +3,7 @@ import * as Collections from 'typescript-collections';
 
 import {CrudService} from './crud.service';
 import {BaseEntity} from '../../_model';
+import * as ModelsClassesMap from '../../_model/model-map';
 
 /**
  * Componente que genera elementos visuales para listar, crear, actualizar y eliminar entidades
@@ -21,8 +22,7 @@ import {BaseEntity} from '../../_model';
 @Component({
   selector: 'app-crud',
   templateUrl: './crud.component.html',
-  styleUrls: ['./crud.component.scss'],
-  providers: [CrudService]
+  styleUrls: ['./crud.component.scss']
 })
 export class CrudComponent implements OnInit {
 
@@ -81,6 +81,12 @@ export class CrudComponent implements OnInit {
   @Input() showToolbarRemoveButton = true;
 
   /**
+   * Define si será mostrado el botón *Esconder Detalle* en el componente {@link ToolbarComponent}
+   * @type {boolean}
+   */
+  @Input() showToolbarHideDetailButton = true;
+
+  /**
    * Define las clases CSS a utilizar por el componente {@link ToolbarComponent}
    * @type {string}
    */
@@ -93,10 +99,59 @@ export class CrudComponent implements OnInit {
   @Input() toolbarItems: any[] = [];
 
   /**
-   * Define la colección de entidades que listará el componente {@link SelectableGridComponent}
-   * @type {LinkedList<BaseEntity>}
+   * Define el comportamiento del componente {@link CrudComponent}
+   * @type {boolean}
    */
-  @Input() entitiesList = new Collections.LinkedList<BaseEntity>();
+  @Input() localData = false;
+
+  /**
+   * Define si el componente {@link SelectableGridComponent} será editable
+   * @type {boolean}
+   */
+  @Input() editableGrid: false;
+
+  /**
+   * Define si se mostrará el componente {@link AddEditComponent}
+   * @type {any[]}
+   */
+  @Input() showAddEdit = true;
+
+  /**
+   * Verifica si la entidad es jerárquica y controla si se muestra el árbol o la tabla de la entidad.
+   * @type {boolean}
+   */
+  @Input() isTree = false;
+
+  /**
+   *  Contiene el listado de las entidades que se van a mostrar en el grid.
+   * @type {LinkedList<BaseEntity>}
+   * @private
+   */
+  private _entitiesList = new Collections.LinkedList<BaseEntity>();
+
+  /**
+   *
+   * @ignore
+   */
+  @Input() get entitiesList() {
+
+    return this._entitiesList;
+  }
+
+  /**
+   *
+   * @ignore
+   */
+  set entitiesList(value: any) {
+    this._entitiesList = value;
+    this.entitiesListChange.emit(this._entitiesList);
+  }
+
+  /**
+   *  Evento que se lanza cuando cambio el valor de la propiedad entitiesList
+   * @type {EventEmitter<any>}
+   */
+  @Output() entitiesListChange = new EventEmitter<any>();
 
   /**
    * Evento lanzado cuando se interactúa con los elementos del {@link ToolbarComponent}
@@ -120,11 +175,7 @@ export class CrudComponent implements OnInit {
    */
   popupVisible = false;
 
-  /**
-   * Constructor del componente
-   * @param {CrudService} crudService
-   */
-  constructor(private crudService: CrudService) {
+  constructor(private crudService: CrudService<BaseEntity>) {
   }
 
   /**
@@ -143,11 +194,21 @@ export class CrudComponent implements OnInit {
       }
     );
 
-    this.entitiesList = this.crudService.getEntitiesList(this.entityType);
+    // if (!this.localData) {
+    //   this.crudService.entityType = this.entityType;
+    // }
+
 
     if (this.entityType === '' && this.entitiesList.size() > 0) {
       this.entityType = this.entitiesList.first().constructor.name;
     }
+
+    const entityInstance = new ModelsClassesMap[this.entityType];
+    if (entityInstance.hasOwnProperty('parentId')) {
+      this.isTree = true;
+    }
+    // console.log(this.crudService.getType());
+
   }
 
   /**
@@ -164,6 +225,19 @@ export class CrudComponent implements OnInit {
       case 'edit':
         this.addEditEntity = this.selectedEntities[0];
         this.popupVisible = true;
+        this.onToolbarItemClicked.emit({type: $event, selectedEntities: this.selectedEntities});
+        if (this.localData) {
+          console.log(this.addEditEntity);
+        }
+        break;
+      case 'remove':
+        if (this.localData) {
+
+        }
+        this.onToolbarItemClicked.emit({type: $event, selectedEntities: this.selectedEntities});
+        break;
+      case 'hide-detail':
+        this.showAddEdit = !this.showAddEdit;
         this.onToolbarItemClicked.emit({type: $event, selectedEntities: this.selectedEntities});
         break;
       default:

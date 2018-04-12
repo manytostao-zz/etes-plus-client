@@ -1,31 +1,23 @@
-<dx-data-grid
-  id="gridContainer"
+<dx-tree-list
+
+  id="TreeContainer"
   width="100%"
+  [dataSource]="listableTreeArray"
   [keyExpr]="keyField"
-  [dataSource]="dataSource"
+  parentIdExpr="parentId"
   [showBorders]="true"
   [columnAutoWidth]="true"
   [wordWrapEnabled]="true"
-  [allowColumnReordering]="true"
-  [allowColumnResizing]="true"
-  [twoWayBindingEnabled]="editable"
   (onSelectionChanged)="handleSelectionChangedEvent($event)"
   (onContentReady)="handleContentReadyEvent($event)">
-
   <dxo-search-panel
     [visible]="true"
-    width="250">
+    width="300">
   </dxo-search-panel>
 
-  <dxo-scrolling
-    mode="infinite"
-    showScrollbar="always">
-  </dxo-scrolling>
-
-  <dxo-editing *ngIf="editable"
-    mode="cell"
-    [allowUpdating]="true">
-  </dxo-editing>
+  <dxo-header-filter
+    [visible]="true">
+  </dxo-header-filter>
 
   <dxo-selection
     [mode]="multipleSelection ? 'multiple': 'single'"
@@ -42,9 +34,7 @@
     *ngFor="let column of columns"
     [dataField]="column.name"
     [dataType]="column.type"
-    [allowEditing]="column.editable === true"
     [width]="getColumnWidth(column.type)"
     [visible]="column.visible">
   </dxi-column>
-
-</dx-data-grid>
+</dx-tree-list>

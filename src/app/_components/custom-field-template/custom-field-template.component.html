@@ -12,12 +12,23 @@
       </dx-text-area>
 
       <app-entity-search
-        *ngSwitchCase="'entitySearch'"
+        *ngSwitchCase="'entity-search'"
         [entityType]="fields.getValue(field).entityType"
         [(selectedEntity)]="entity[field]"
         [properties]="fields.getValue(field).properties"
         [disabled]="disabled">
       </app-entity-search>
+
+      <app-crud
+        *ngSwitchCase="'detail'"
+        toolbarCssClass="navbar navbar-expand-lg navbar-light bg-light"
+        [showToolbarHideDetailButton]="false"
+        [editableGrid]="true"
+        [showAddEdit]="false"
+        [entityType]="fields.getValue(field).entityType"
+        [(entitiesList)]="entity[field]"
+        [localData]="true">
+      </app-crud>
 
     </div>
 
