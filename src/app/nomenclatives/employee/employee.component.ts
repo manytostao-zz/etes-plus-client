@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {CrudService} from '../../_components/crud/crud.service';
-import {EmployeeCrudService} from './employee-crud.service';
+import { Component, OnInit } from '@angular/core';
+import { CrudService } from '../../_components/crud/crud.service';
+import { EmployeeCrudService } from './employee-crud.service';
 import notify from 'devextreme/ui/notify';
 
 @Component({
