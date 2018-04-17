@@ -11,11 +11,13 @@ import {NomenclativesRoutingModule} from './nomenclatives-routing.module';
 import {SharedModule} from '../shared/shared.module';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
+import { BankComponent } from './bank/bank.component';
 
 @NgModule({
   declarations: [
     EmployeeComponent,
-    NomenclativesComponent
+    NomenclativesComponent,
+    BankComponent
   ],
   imports: [
     CommonModule,

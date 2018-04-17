@@ -1,20 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { CrudService } from '../../_components/crud/crud.service';
-import { EmployeeCrudService } from './employee-crud.service';
+import { BankCrudService } from './bank-crud.service';
 import notify from 'devextreme/ui/notify';
 
 @Component({
-  selector: 'app-employee',
-  templateUrl: './employee.component.html',
-  styleUrls: ['./employee.component.scss'],
-  providers: [{provide: CrudService, useClass: EmployeeCrudService}]
+  selector: 'app-bank',
+  templateUrl: './bank.component.html',
+  styleUrls: ['./bank.component.scss'],
+  providers: [{provide: CrudService, useClass: BankCrudService}]
 })
-export class EmployeeComponent implements OnInit {
+export class BankComponent implements OnInit {
   toolbarItems: any[] = [];
-  entityType = 'Employee';
+  entityType = 'Bank';
 
-  constructor() {
-  }
+  constructor() { }
 
   ngOnInit() {
     this.toolbarItems = [
@@ -29,10 +28,6 @@ export class EmployeeComponent implements OnInit {
             type: 'rowSelection',
             values: ['multiple']
           },
-          {
-            type: 'position',
-            values: ['CDO', 'CGO']
-          }
         ]
       },
       {
@@ -40,14 +35,9 @@ export class EmployeeComponent implements OnInit {
         text: 'Settings',
         onClick: () => {
           notify('Settings option has been clicked!');
-        },
-        disableConditions: [
-          {
-            type: 'prefix',
-            values: ['Ms.']
-          }
-        ]
+        }
       }
     ];
   }
+
 }

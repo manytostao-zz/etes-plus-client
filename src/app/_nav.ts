@@ -19,6 +19,11 @@ export const navigation = [
         icon: 'icon-people'
       },
       {
+        name: 'Bank',
+        url: '/nomenclatives/bank',
+        icon: 'icon-credit-card'
+      },
+      {
         name: 'Payment Means',
         url: '/nomenclatives/payment-means',
         icon: 'icon-credit-card'

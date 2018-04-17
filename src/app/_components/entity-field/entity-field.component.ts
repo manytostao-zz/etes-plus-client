@@ -109,7 +109,8 @@ export class EntityFieldComponent implements OnInit {
         this._treeValue = this.entityName + '.' + e.node.parent.itemData.properties + '.' + e.node.itemData.properties;
       } else {
         if (e.node.parent && e.node.parent.parent && e.node.parent.parent.parent === null) {
-          this._treeValue = this.entityName + '.' + e.node.parent.parent.itemData.properties + '.' + e.node.parent.itemData.properties + '.' + e.node.itemData.properties;
+          this._treeValue = this.entityName + '.' + e.node.parent.parent.itemData.properties + '.' + e.node.parent.itemData.properties +
+            '.' + e.node.itemData.properties;
         }
       }
     }
