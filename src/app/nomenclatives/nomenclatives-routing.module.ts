@@ -12,7 +12,6 @@ import {BankComponent} from './bank/bank.component';
 const nomenclativesRoutes: Routes = [
   {
     path: '',
-    component: NomenclativesComponent,
     data: {title: 'Nomenclatives'},
     children: [
       {
