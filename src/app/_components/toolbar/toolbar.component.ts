@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
+import notify from 'devextreme/ui/notify';
 
 /**
  * Componente que genera una barra botonera o de herramientas dinámicamente
@@ -99,6 +100,13 @@ export class ToolbarComponent {
   @Output() onToolbarItemClickedEvent = new EventEmitter<string>();
 
   /**
+   * Indica si se muestra el tooltips (información) de la herramienta en el boton del toolbar.
+   * @type {boolean}
+   */
+  showTooltip = { visible: false, type: '' };
+
+
+  /**
    * Deshabilita o habilita los elementos del componente a partir de condiciones definidas en el elemento
    *
    * @example
@@ -160,6 +168,16 @@ export class ToolbarComponent {
         return false;
     }
   }
+
+  /**
+   * Función que activa el tooltips(Información de herramienta) del boton señalado
+   * @param type : tipo de boton.
+   */
+  showsTooltipsDinamic(type) {
+    this.showTooltip.visible = !this.showTooltip.visible;
+    this.showTooltip.type = type;
+  }
+
 
   /**
    * Maneja la suscripción al evento onItemClick del componente dx-toolbar de DevExpress
