@@ -18,6 +18,7 @@ export class Employee extends BaseEntity {
       category: 'general'
     }
   })
+  @Reflect.metadata('filterable', 'string')
   firstName: string;
 
   @Reflect.metadata('listable', {
@@ -28,6 +29,7 @@ export class Employee extends BaseEntity {
       category: 'general'
     }
   })
+  @Reflect.metadata('filterable', 'string')
   lastName: string;
 
   @Reflect.metadata('listable', {
@@ -38,6 +40,7 @@ export class Employee extends BaseEntity {
       category: 'general'
     }
   })
+  @Reflect.metadata('filterable', 'string')
   prefix: string;
 
   @Reflect.metadata('listable', {
@@ -49,6 +52,7 @@ export class Employee extends BaseEntity {
       category: 'general'
     }
   })
+  @Reflect.metadata('filterable', 'string')
   position: string;
 
   @Reflect.metadata('widget', {
@@ -67,6 +71,7 @@ export class Employee extends BaseEntity {
       group: 'dates'
     }
   })
+  @Reflect.metadata('filterable', 'date')
   birthDate: Date;
 
   @Reflect.metadata('listable', {
@@ -78,6 +83,7 @@ export class Employee extends BaseEntity {
       group: 'dates'
     }
   })
+  @Reflect.metadata('filterable', 'date')
   hireDate: Date;
 
   @Reflect.metadata('listable', {
@@ -90,6 +96,7 @@ export class Employee extends BaseEntity {
       group: 'textarea'
     }
   })
+  @Reflect.metadata('filterable', 'string')
   notes: string;
 
   @Reflect.metadata('listable', {
@@ -102,6 +109,7 @@ export class Employee extends BaseEntity {
       group: 'textarea'
     }
   })
+  @Reflect.metadata('filterable', 'string')
   address: string;
 
   @Reflect.metadata('widget', {
@@ -109,6 +117,7 @@ export class Employee extends BaseEntity {
       category: 'others'
     }
   })
+  @Reflect.metadata('filterable', 'string')
   state: string;
 
   @Reflect.metadata('widget', {
@@ -116,6 +125,7 @@ export class Employee extends BaseEntity {
       category: 'others'
     }
   })
+  @Reflect.metadata('filterable', 'number')
   city: string;
 
   @Reflect.metadata('widget', {
