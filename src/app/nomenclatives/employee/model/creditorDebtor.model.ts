@@ -173,7 +173,7 @@ export class CreditorDebtor extends BaseEntity implements IHierarchicalEntity {
               certificate: Certificate,
               certificates: Collections.LinkedList<Certificate>) {
     super(id);
-    this.parentId =parentId;
+    this.parentId = parentId;
     this.parentCode = parentCode;
     this.parentDescription = parentDescription;
     this.hierarchialLevel = hierarchialLevel;
