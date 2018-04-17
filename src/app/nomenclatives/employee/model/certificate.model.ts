@@ -16,6 +16,7 @@ export class Certificate extends BaseEntity {
       category: 'general'
     }
   })
+  @Reflect.metadata('filterable', 'string')
   title: string;
 
   @Reflect.metadata('listable', {
@@ -26,6 +27,7 @@ export class Certificate extends BaseEntity {
       category: 'general'
     }
   })
+  @Reflect.metadata('filterable', 'date')
   expeditionDate: Date;
 
   constructor(id: string, title: string, expeditionDate: Date) {

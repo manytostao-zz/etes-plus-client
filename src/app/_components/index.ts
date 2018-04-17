@@ -11,3 +11,4 @@ export * from './entity-search/entity-search.component';
 export * from './selectable-grid/selectable-grid.component';
 export * from './toolbar/toolbar.component';
 export * from './tree-list/tree-list.component';
+export * from './filter-panel/filter-panel.component';

@@ -78,6 +78,7 @@ import {ButtonsModule} from 'ngx-bootstrap';
 import {SharedModule} from './shared/shared.module';
 
 
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -93,7 +94,7 @@ import {SharedModule} from './shared/shared.module';
     AppComponent,
     ...APP_CONTAINERS,
     ...APP_COMPONENTS,
-    ...APP_DIRECTIVES,
+    ...APP_DIRECTIVES
   ],
   providers: [{
     provide: LocationStrategy,

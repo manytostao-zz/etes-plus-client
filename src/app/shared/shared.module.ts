@@ -14,7 +14,8 @@ import {
   CustomFieldTemplateComponent,
   TreeListComponent,
   ToolbarComponent,
-  SelectableGridComponent
+  SelectableGridComponent,
+  FilterPanelComponent
 } from '../_components';
 
 const APP_COMPONENTS = [
@@ -25,7 +26,8 @@ const APP_COMPONENTS = [
   CustomFieldTemplateComponent,
   TreeListComponent,
   ToolbarComponent,
-  SelectableGridComponent
+  SelectableGridComponent,
+  FilterPanelComponent
 ];
 
 @NgModule({
