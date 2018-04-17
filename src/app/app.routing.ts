@@ -3,6 +3,7 @@ import {Routes, RouterModule} from '@angular/router';
 
 import {DashboardComponent} from './_components';
 import {SimpleLayoutComponent} from './_layout/containers/simple-layout';
+import {FullLayoutComponent} from './_layout/containers/full-layout';
 
 export const routes: Routes = [
   {
@@ -11,16 +12,15 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'dashboard',
-    component: DashboardComponent,
-    data: {
-      title: 'Dashboard'
-    }
+    path: '', component: FullLayoutComponent,
+    data: {title: 'Dashboard'},
+    children: [
+      {path: 'dashboard', component: DashboardComponent},
+    ]
   },
   {
     path: 'nomenclatives',
-    component: SimpleLayoutComponent,
-    // data: {title: 'Nomenclatives'},
+    component: FullLayoutComponent,
     children: [
       {
         path: '',
