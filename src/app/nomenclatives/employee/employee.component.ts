@@ -47,6 +47,42 @@ export class EmployeeComponent implements OnInit {
             values: ['Ms.']
           }
         ]
+      },
+      {
+        locateInMenu: 'auto',
+        location: 'before',
+        widget: 'dxButton',
+        text: 'Refrescar',
+        type: 'Ref',
+        options: {tooltips: 'Recarga la pagina nuevamente'},
+        icon: 'refresh',
+        onClick: () => {
+          notify('refresh option has been clicked!');
+        },
+        disableConditions: [
+          {
+            type: 'prefix',
+            values: ['Ms.']
+          }
+        ]
+      },
+      {
+        locateInMenu: 'auto',
+        location: 'before',
+        widget: 'dxButton',
+        text: 'usuario',
+        icon: 'user',
+        type: 'user',
+        options: { tooltips: 'Muestra la info del usuario'},
+        onClick: () => {
+          notify('trash option has been clicked!');
+        },
+        disableConditions: [
+          {
+            type: 'prefix',
+            values: ['Ms.']
+          }
+        ]
       }
     ];
   }
