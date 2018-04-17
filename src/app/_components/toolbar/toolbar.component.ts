@@ -103,7 +103,7 @@ export class ToolbarComponent {
    * Indica si se muestra el tooltips (información) de la herramienta en el boton del toolbar.
    * @type {boolean}
    */
-  showTooltip = { visible: true, type: '' };
+  showTooltip = { visible: false, type: '' };
 
 
   /**
