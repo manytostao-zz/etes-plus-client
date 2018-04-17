@@ -1,0 +1,81 @@
+<div class="card">
+  <div class="card-header bg-info">
+    Filtros:
+  </div>
+  <div class="card-body" id="demo">
+    <dx-form
+      [(formData)]="filterInstance">
+      <dxi-item itemType="group" cssClass="second-group" [colCount]="2">
+
+        <dxi-item
+          *ngFor="let field of fieldsFilterMetadata"
+          class="dx-field">
+
+          <div
+            class="dx-field-label"
+            style="width: 30%">
+            {{field.name}}:
+          </div>
+
+          <div *ngIf="field.datatype ==='string'"
+               class="dx-field-value"
+               style="width: 35%">
+            <dx-text-box
+              placeholder="Write to find..."
+              [(value)]="filterInstance[field.fieldname]">
+            </dx-text-box>
+          </div>
+          <div *ngIf="field.datatype ==='date'"
+               class="dx-field-value"
+               style="width: 35%">
+            <dx-date-box
+              type="date"
+              [(value)]="filterInstance[field.fieldname]">
+            </dx-date-box>
+          </div>
+          <div *ngIf="field.datatype ==='number'"
+               class="dx-field-value"
+               style="width: 35%">
+            <dx-number-box
+              [(value)]="filterInstance[field.fieldname]">
+            </dx-number-box>
+          </div>
+
+          <div class="dx-field-value"
+               style="width: 35%">
+            <dx-select-box
+              *ngIf="field.datatype ==='string'"
+              [dataSource]="filterStringAttributes"
+              displayExpr="Name"
+              valueExpr="ID"
+              placeholder="Filtro"
+              [showClearButton]="true">
+            </dx-select-box>
+            <dx-select-box
+              *ngIf="field.datatype ==='date'"
+              [dataSource]="filterDateAttributes"
+              displayExpr="Name"
+              valueExpr="ID"
+              placeholder="Filtro"
+              [showClearButton]="true">
+            </dx-select-box>
+            <dx-select-box
+              *ngIf="field.datatype ==='number'"
+              [dataSource]="filterNumberAttributes"
+              displayExpr="Name"
+              valueExpr="ID"
+              placeholder="Filtro"
+              [showClearButton]="true">
+            </dx-select-box>
+          </div>
+        </dxi-item>
+
+      </dxi-item>
+    </dx-form>
+  </div>
+
+  <div class="card-footer">
+    <button type="button" class="btn btn-success">Aceptar</button>
+    <button type="button" class="btn btn-danger pull-right" (click)="onReset()">Limpiar</button>
+  </div>
+</div>
