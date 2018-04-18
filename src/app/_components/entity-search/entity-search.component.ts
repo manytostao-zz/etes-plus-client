@@ -1,7 +1,7 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 
 import {BaseEntity} from '../../_model';
-import {Certificate} from '../../crud-test/model/certificate.model';
+import {Certificate} from '../../nomenclatives/employee/model/certificate.model';
 
 /**
  * Componente que permite acceder al crud de la entitdad, o crear una nueva entidad
@@ -9,9 +9,9 @@ import {Certificate} from '../../crud-test/model/certificate.model';
  * @example
  *
  * <app-entity-search
- *             entityType="Employee"
  *             [properties]="['code']"
- *             [entityType]="'Certificate'">
+ *             [entityType]="'Certificate'"
+ *             [(selectedEntity)]="entity">
  * </app-entity-search>
  */
 @Component({
@@ -40,15 +40,27 @@ export class EntitySearchComponent {
   @Input() properties: any[] = ['code', 'description'];
 
   /**
+   * Define si será mostrado el botón *Agregar* en el componente
+   * @type {boolean}
+   */
+  @Input() showAddButton = true;
+
+  /**
+   * Define si será mostrado el botón *Buscar* en el componente
+   * @type {boolean}
+   */
+  @Input() showSearchButton = true;
+
+  /**
+   * Define si será mostrado el botón *Eliminar* en el componente
+   * @type {boolean}
+   */
+  @Input() showRemoveButton = true;
+
+  /**
    *  Referencia al elemento input de la vista
    */
   @ViewChild('entitySearchTextBox') entitySearchTextBox;
-
-  /**
-   * Contiene la entidad seleccionada en el componente {@link CrudComponent} que maneja el {@link EntitySearchComponent}
-   */
-  @Input() selectedEntity: BaseEntity;
-
   /**
    * Define la entidad que controla el el componente {@link AddEditComponent} que maneja el {@link EntitySearchComponent}
    */
@@ -65,6 +77,33 @@ export class EntitySearchComponent {
    * @type {boolean}
    */
   addEditPopupVisible = false;
+
+  /**
+   * Contiene la entidad seleccionada en el componente {@link CrudComponent} que maneja el {@link EntitySearchComponent}
+   */
+  private _selectedEntity: BaseEntity;
+
+  /**
+   * Evento que se lanza cuando cambia el valor de la propiedad selectedEntity
+   * @type {EventEmitter<BaseEntity>}
+   */
+  @Output() selectedEntityChange = new EventEmitter<BaseEntity>();
+
+  /**
+   * @ignore
+   */
+  @Input() get selectedEntity(): BaseEntity {
+
+    return this._selectedEntity;
+  }
+
+  /**
+   * @ignore
+   */
+  set selectedEntity(value: BaseEntity) {
+    this._selectedEntity = value;
+    this.selectedEntityChange.emit(this._selectedEntity);
+  }
 
   /**
    *  Maneja la suscripción al evento (onToolbarItemClicked) del componente (@link CrudComponent)
@@ -103,22 +142,25 @@ export class EntitySearchComponent {
   }
 
   /**
-   * Limpia la entidad seleccionada
+   * Limpia la entidad seleccionada.
    */
   removeEntity() {
     this.entitySearchTextBox.value = undefined;
   }
 
-
+  /**
+   * Muestra en el input del {@link EntitySearchComponent} los valores de las propiedades pasadas como parámetros.ng
+   * @returns {string}
+   */
   getTextBoxDisplayValue() {
     let displayValue = '';
-    if (this.selectedEntity !== undefined && this.selectedEntity !== null) {
+    if (this._selectedEntity !== undefined && this._selectedEntity !== null) {
       if (this.properties.length > 1) {
         for (let i = 1; i < this.properties.length; i++) {
-          displayValue += ' - ' + this.selectedEntity[this.properties[i]];
+          displayValue += ' - ' + this._selectedEntity[this.properties[i]];
         }
       } else {
-        displayValue = this.selectedEntity[this.properties[0]];
+        displayValue = this._selectedEntity[this.properties[0]];
       }
     }
     return displayValue;

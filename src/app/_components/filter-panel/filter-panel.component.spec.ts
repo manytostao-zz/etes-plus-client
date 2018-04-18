@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CrudTestComponent } from './crud-test.component';
+import { FilterPanelComponent } from './filter-panel.component';
 
-describe('CrudTestComponent', () => {
-  let component: CrudTestComponent;
-  let fixture: ComponentFixture<CrudTestComponent>;
+describe('FilterPanelComponent', () => {
+  let component: FilterPanelComponent;
+  let fixture: ComponentFixture<FilterPanelComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CrudTestComponent ]
+      declarations: [ FilterPanelComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CrudTestComponent);
+    fixture = TestBed.createComponent(FilterPanelComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

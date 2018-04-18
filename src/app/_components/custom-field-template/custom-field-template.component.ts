@@ -1,7 +1,8 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 import {BaseEntity} from '../../_model';
 import * as Collections from 'typescript-collections';
+import {CrudService} from '../crud/crud.service';
 
 /**
  * Componente que genera dinámicamente un control visual de formulario para la edición del valor de la propiedad de una entidad
@@ -44,8 +45,5 @@ export class CustomFieldTemplateComponent {
    * Define la entidad a la cual se le modificarán los [fields]{@link CustomFieldTemplateComponent#fields}
    */
   @Input() entity: BaseEntity;
-
-  constructor(private crudService) {
-  }
 
 }

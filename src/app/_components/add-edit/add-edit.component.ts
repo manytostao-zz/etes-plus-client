@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import * as Collections from 'typescript-collections';
 
 import {BaseEntity} from '../../_model';
@@ -58,33 +58,35 @@ export class AddEditComponent implements OnInit {
   extractEntityMetadata() {
     for (const field in this.entity) {
       if (this.entity.hasOwnProperty(field)) {
-        if (Reflect.hasMetadata('category', this.entity, field)) {
-          const category = Reflect.getMetadata('category', this.entity, field);
-          if (!this.fieldsLocationMetadata.containsKey(category)) {
-            this.fieldsLocationMetadata.setValue(category, new Collections.Dictionary<string, string[]>());
-          }
-          if (Reflect.hasMetadata('group', this.entity, field)) {
-            const group = Reflect.getMetadata('group', this.entity, field);
-            if (!this.fieldsLocationMetadata.getValue(category).containsKey(group)) {
-              this.fieldsLocationMetadata.getValue(category).setValue(group, [field]);
-            } else {
-              this.fieldsLocationMetadata.getValue(category).getValue(group).push(field)
-            }
-          } else {
-            const group = '';
-            if (!this.fieldsLocationMetadata.getValue(category).containsKey(group)) {
-              this.fieldsLocationMetadata.getValue(category).setValue(group, [field]);
-            } else {
-              this.fieldsLocationMetadata.getValue(category).getValue(group).push(field)
-            }
-          }
-        }
+        let widgetMetadata: any;
         if (Reflect.hasMetadata('widget', this.entity, field)) {
-          const widget = Reflect.getMetadata('widget', this.entity, field);
-          if (!this.fieldsWidgetsMetadata.containsKey(widget.name)) {
-            this.fieldsWidgetsMetadata.setValue(widget.name, new Collections.Dictionary<string, any>());
+          widgetMetadata = Reflect.getMetadata('widget', this.entity, field);
+          if (!this.fieldsLocationMetadata.containsKey(widgetMetadata.location.category)) {
+            this.fieldsLocationMetadata.setValue(widgetMetadata.location.category, new Collections.Dictionary<string, string[]>());
           }
-          this.fieldsWidgetsMetadata.getValue(widget.name).setValue(field, widget.options !== undefined ? widget.options : null);
+          if (!this.fieldsLocationMetadata
+              .getValue(widgetMetadata.location.category)
+              .containsKey(widgetMetadata.location.group !== undefined ? widgetMetadata.location.group : '')) {
+            this.fieldsLocationMetadata
+              .getValue(widgetMetadata.location.category)
+              .setValue(widgetMetadata.location.group !== undefined ? widgetMetadata.location.group : '', [field]);
+          } else {
+            this.fieldsLocationMetadata
+              .getValue(widgetMetadata.location.category)
+              .getValue(widgetMetadata.location.group !== undefined ? widgetMetadata.location.group : '')
+              .push(field);
+          }
+          if (Reflect.hasMetadata('widget', this.entity, field)) {
+            widgetMetadata = Reflect.getMetadata('widget', this.entity, field);
+            if (widgetMetadata.name !== undefined) {
+              if (!this.fieldsWidgetsMetadata.containsKey(widgetMetadata.name)) {
+                this.fieldsWidgetsMetadata.setValue(widgetMetadata.name, new Collections.Dictionary<string, any>());
+              }
+              this.fieldsWidgetsMetadata
+                .getValue(widgetMetadata.name)
+                .setValue(field, widgetMetadata.options !== undefined ? widgetMetadata.options : null);
+            }
+          }
         }
       }
     }
@@ -97,8 +99,8 @@ export class AddEditComponent implements OnInit {
    */
   getTemplateNameByField(field: string) {
     if (Reflect.hasMetadata('widget', this.entity, field)) {
-      const widgetName = Reflect.getMetadata('widget', this.entity, field);
-      if (widgetName !== undefined) {
+      const widgetMetadata = Reflect.getMetadata('widget', this.entity, field);
+      if (widgetMetadata.name !== undefined) {
         return field + 'Template';
       }
     }
